@@ -10,11 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2022_11_17_101752) do
+=======
+ActiveRecord::Schema.define(version: 2022_11_16_172325) do
+>>>>>>> main
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+<<<<<<< HEAD
   create_table "answers", force: :cascade do |t|
     t.text "body"
     t.bigint "question_id", null: false
@@ -23,6 +28,8 @@ ActiveRecord::Schema.define(version: 2022_11_17_101752) do
     t.index ["question_id"], name: "index_answers_on_question_id"
   end
 
+=======
+>>>>>>> main
   create_table "questions", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -30,5 +37,8 @@ ActiveRecord::Schema.define(version: 2022_11_17_101752) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+<<<<<<< HEAD
   add_foreign_key "answers", "questions"
+=======
+>>>>>>> main
 end
