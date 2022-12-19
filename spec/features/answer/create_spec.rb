@@ -31,4 +31,3 @@ feature 'User can create answer', %q{
     end
   end
 end
-

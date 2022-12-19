@@ -11,7 +11,3 @@ class User < ApplicationRecord
     user.id == id
   end
 end
-
-
-
-
