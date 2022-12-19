@@ -1,17 +1,14 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :load_question, only: %i[edit show update destroy]
+  before_action :question, except: [:index]
 
   def index
     @questions = Question.all
   end
 
-  def new
-    @question = Question.new
-  end
+  def new; end
 
   def create
-    @question = Question.new(question_params)
     if @question.save
       redirect_to @question, notice: "Your question successfully created."
     else
@@ -32,17 +29,21 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question.destroy
-    redirect_to questions_path
+    if current_user.is_owner?(@question.author)
+      @question.destroy
+    redirect_to questions_path, notice: 'Question was successfully deleted'
+    else
+      redirect_to questions_path, notice: 'Fuck you'
+  end
   end
 
   private
 
-  def load_question
-    @question = Question.find(params[:id])
+  def question
+    @question = params[:id] ? Question.find(params[:id]) : current_user.questions.new(question_params)
   end
 
   def question_params
-    params.require(:question).permit(:title, :body)
+    (params[:question] || ActionController::Parameters.new).permit(:title, :body)
   end
 end
