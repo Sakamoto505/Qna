@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: %i[index show]
   before_action :question, except: [:index]
 
   def index
@@ -10,7 +12,7 @@ class QuestionsController < ApplicationController
 
   def create
     if @question.save
-      redirect_to @question, notice: "Your question successfully created."
+      redirect_to @question, notice: 'Your question successfully created.'
     else
       render :new
     end
@@ -31,10 +33,10 @@ class QuestionsController < ApplicationController
   def destroy
     if current_user.is_owner?(@question.author)
       @question.destroy
-    redirect_to questions_path, notice: 'Question was successfully deleted'
+      redirect_to questions_path, notice: 'Question was successfully deleted'
     else
-      redirect_to questions_path, notice: 'Fuck you'
-  end
+      redirect_to questions_path, notice: 'Sorry'
+    end
   end
 
   private

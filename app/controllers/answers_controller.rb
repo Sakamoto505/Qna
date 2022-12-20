@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AnswersController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
   before_action :find_question, only: %i[new create]
@@ -6,15 +8,15 @@ class AnswersController < ApplicationController
   def index
     @answers = @question.answers
   end
+
   def new
     @answer = @question.answers.new
   end
 
   def destroy
-      @answer.destroy if current_user.is_owner?(@answer.author)
-      redirect_to question_path(@answer.question), notice: 'Answer was successfully deleted'
+    @answer.destroy if current_user.is_owner?(@answer.author)
+    redirect_to question_path(@answer.question), notice: 'Answer was successfully deleted'
   end
-
 
   def create
     @answer = @question.answers.new(answer_params)
