@@ -1,0 +1,5 @@
+div
+  - @questions.each do |question|
+    div= question.title
+
+p= link_to 'Ask question', new_question_path
