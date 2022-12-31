@@ -15,7 +15,7 @@ p= @question.body
   p Answers
 .answer-errors
   = render 'shared/errors', resource: @answer
-  = form_with model: [@question, @question.answers.new], local: true  do |f|
+  = form_with model: [@question, @question.answers.new], local: false do |f|
     = f.label :body
     = f.text_field :body
     = f.submit 'Answer'
