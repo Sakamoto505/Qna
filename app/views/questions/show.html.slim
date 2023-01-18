@@ -1,4 +1,3 @@
-= render 'shared/errors', resource: @answer
 
 h1= @question.title
 p= @question.body
@@ -15,7 +14,7 @@ p= @question.body
   p Answers
 .answer-errors
   = render 'shared/errors', resource: @answer
-  = form_with model: [@question, @question.answers.new], local: false do |f|
-    = f.label :body
-    = f.text_field :body
-    = f.submit 'Answer'
+= form_with model: [@question, @question.answers.new], class: 'new-answer', local: false do |f|
+  = f.label :body
+  = f.text_field :body
+  = f.submit 'Answer'

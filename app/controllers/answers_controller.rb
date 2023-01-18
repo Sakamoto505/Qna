@@ -3,7 +3,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
   before_action :find_question, only: %i[new create]
-  before_action :answer, only: %i[edit destroy]
+  before_action :answer, only: %i[update destroy]
 
   def index
     @answers = @question.answers
@@ -22,7 +22,11 @@ class AnswersController < ApplicationController
     @answer = @question.answers.new(answer_params)
     @answer.author = current_user
     @answer.save
+  end
 
+  def update
+    @answer.update(answer_params) if current_user.is_owner?(@answer.author)
+    @question = @answer.question
   end
 
   private
