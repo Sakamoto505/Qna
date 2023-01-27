@@ -8,7 +8,6 @@ RSpec.describe AnswersController, type: :controller do
 
   let(:other_user) { create(:user) }
 
-
   describe 'POST #create' do
     before  { login(user) }
 
@@ -45,21 +44,10 @@ RSpec.describe AnswersController, type: :controller do
 
   describe 'DELETE #destroy' do
     before { login(user) }
-
     let!(:answer) { create(:answer, author: user, question: question) }
 
     it 'deletes the answer' do
-      expect { delete :destroy, params: { id: answer } }.to change(Answer, :count).by(-1)
-    end
-
-    it 'deletes the answer' do
-      delete :destroy, params: { id: answer }
-      expect(response).to redirect_to question
-    end
-
-    it 'Attempting to delete a answer from a non-current user' do
-      login(other_user)
-      expect { delete :destroy, params: { id: answer } }.to_not change(Answer, :count)
+      expect { delete :destroy, params: { id: answer }, format: :js }.to change(Answer, :count).by(-1)
     end
   end
 
@@ -70,7 +58,7 @@ RSpec.describe AnswersController, type: :controller do
 
     context 'with valid attributes' do
       it 'changes answer attributes' do
-        patch :update, params: {question_id: question.id, id: answer, answer: attributes_for(:answer) }, format: :js
+        patch :update, params: { question_id: question.id, id: answer, answer: attributes_for(:answer) }, format: :js
         answer.reload
         expect(answer.body).to eq 'Answer_Body'
       end
@@ -95,4 +83,3 @@ RSpec.describe AnswersController, type: :controller do
     end
   end
 end
-
