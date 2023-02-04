@@ -1,0 +1,3 @@
+$('.best-answer').contents().first().prependTo('.other-answers');
+$('div.answer[data-answer_id="<%= @answer.id %>"]').remove();
+$('.best-answer').prepend('<%= j render @answer %>');

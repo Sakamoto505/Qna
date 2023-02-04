@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :answer do
-    body { "Answer_Body" }
+    body { 'Answer_Body' }
     question
     author factory: :user
   end

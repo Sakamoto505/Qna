@@ -7,12 +7,13 @@
 
 
   .answers
-    -if @question.answers.present?
-      = render @question.answers
-    -else
-      p No answers.
+  h3 Best answer
+  .best-answer
+    = render @question.best_answer if @question.best_answer.present?
+  h3 Other answers
+  .other-answers
+    = render @other_answers
 
-    p Answers
 
   .answer-errors
     = render 'shared/errors', resource: @answer

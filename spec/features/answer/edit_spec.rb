@@ -43,7 +43,7 @@ feature 'User can edit answer', "
         fill_in 'Your answer', with: ''
         click_on 'Save'
       end
-        expect(page).to have_content "Body can't be blank"
+      expect(page).to have_content "Body can't be blank"
     end
   end
 end
