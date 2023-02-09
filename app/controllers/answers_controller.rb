@@ -16,6 +16,7 @@ class AnswersController < ApplicationController
   def destroy
     @answer.destroy if current_user.is_owner?(@answer.author)
   end
+
   def create
     @answer = @question.answers.new(answer_params)
     @answer.author = current_user

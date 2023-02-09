@@ -1,3 +1,4 @@
-$('.best-answer').contents().first().prependTo('.other-answers');
-$('div.answer[data-answer_id="<%= @answer.id %>"]').remove();
-$('.best-answer').prepend('<%= j render @answer %>');
+oldBestAnswer = $('.best-answer').contents().first();
+oldBestAnswer.prependTo('.other-answers');
+$('#answer-<%= @answer.id %>').remove();
+$('.best-answer').html('<%= j render @answer %>');

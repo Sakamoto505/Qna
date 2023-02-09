@@ -1,3 +1,2 @@
 <% unless @answer.persisted? %>
-$('div.answer[data-answer_id="<%= @answer.id %>"]').remove();
-<% end %>
+$('#answer-<%= @answer.id %>').remove();<% end %>

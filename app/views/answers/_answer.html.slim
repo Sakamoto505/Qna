@@ -1,5 +1,5 @@
 
-.answer*{data: { answer_id: answer.id }}
+div id="answer-#{answer.id}"
   p= answer.body
   - if user_signed_in? && current_user.is_owner?(@question.author)
     = link_to 'Edit answer', '#', class: 'edit-answer-link', data: { answer_id: answer.id }

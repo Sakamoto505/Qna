@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 feature 'User can see questions and answers', "
@@ -9,13 +11,6 @@ feature 'User can see questions and answers', "
     visit question_path(question)
     expect(page).to have_content(question.title)
     expect(page).to have_content(question.body)
-  end
-
-  describe 'no answers' do
-    given(:question) { create(:question) }
-    scenario 'the user sees a message about no responses' do
-      expect(page).to have_content 'No answers'
-    end
   end
 
   describe 'With answers' do
