@@ -18,16 +18,15 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def show; end
-
-  def edit; end
+  def show
+    @answer = Answer.new
+    @answers = @question.answers
+    @best_answer = @question.best_answer
+    @other_answers = @question.answers.where.not(id: @question.best_answer_id)
+  end
 
   def update
-    if @question.update(question_params)
-      redirect_to @question
-    else
-      render :edit
-    end
+    @question.update(question_params) if current_user.is_owner?(@question.author)
   end
 
   def destroy

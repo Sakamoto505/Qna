@@ -3,7 +3,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
   before_action :find_question, only: %i[new create]
-  before_action :answer, only: %i[edit destroy]
+  before_action :answer, only: %i[update destroy set_best]
 
   def index
     @answers = @question.answers
@@ -15,17 +15,23 @@ class AnswersController < ApplicationController
 
   def destroy
     @answer.destroy if current_user.is_owner?(@answer.author)
-    redirect_to question_path(@answer.question), notice: 'Answer was successfully deleted'
   end
 
   def create
     @answer = @question.answers.new(answer_params)
     @answer.author = current_user
-    if @answer.save
-      redirect_to @question
-    else
-      render template: 'questions/show'
-    end
+    @answer.save
+  end
+
+  def set_best
+    @answer.mark_as_best if current_user.is_owner?(@answer.author)
+    @question = @answer.question
+    @question.save
+  end
+
+  def update
+    @answer.update(answer_params) if current_user.is_owner?(@answer.author)
+    @question = @answer.question
   end
 
   private

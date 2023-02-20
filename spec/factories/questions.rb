@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :question do
     title { 'Question_title' }
     body { 'Question_body' }
     author factory: :user
-
   end
 
   trait :invalid do
@@ -15,5 +16,4 @@ FactoryBot.define do
       create_list(:answer, 3, question_id: question.id)
     end
   end
-
 end

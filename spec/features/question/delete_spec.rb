@@ -1,16 +1,16 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-feature  'User can delete question', %q{
+feature 'User can delete question', '
   I would like to be able to delete a
   question as an (un)authorized user
-} do
-
+' do
   given(:current_user) { create(:user) }
   given(:question_author) { create(:user) }
   given(:question) { create(:question, author: current_user) }
 
   describe 'Authorized user' do
-
     background do
       sign_in(current_user)
     end
@@ -36,12 +36,10 @@ feature  'User can delete question', %q{
   end
 
   describe 'Unauthorized user' do
+    scenario 'Trying to delete' do
+      visit question_path(question)
 
-    scenario "Trying to delete" do
-    visit question_path(question)
-
-    expect(page).to have_no_link 'Delete'
-
+      expect(page).to have_no_link 'Delete'
     end
   end
 end

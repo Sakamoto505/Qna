@@ -1,0 +1,14 @@
+
+div id="answer-#{answer.id}"
+  p= answer.body
+  - if user_signed_in? && current_user.is_owner?(@question.author)
+    = link_to 'Edit answer', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
+    '| |
+    = link_to 'Delete answer', answer_path(answer), remote: true, class: 'delete-answer-link', data: { answer_id: answer.id }, method: :delete
+    '| |
+    = link_to 'Best', set_best_answer_path(answer), remote: true, class: 'best-answer-link', data: { answer_id: answer.id }, method: :patch
+
+    = form_with model: answer, local: false, class: 'hidden', html: { id: "edit-answer-#{answer.id}" } do |f|
+      = f.label :body, 'Your answer'
+      = f.text_area :body
+      = f.submit 'Save'

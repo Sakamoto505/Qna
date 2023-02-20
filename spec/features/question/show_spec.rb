@@ -1,26 +1,27 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-feature 'Show question', %{
+feature 'Show question', %(
   The user wants to see
   a list of all questions
   you can watch without registration,
   as well as with registration
-} do
-
+) do
   given!(:question) { create(:question) }
 
   background do
     visit questions_path
   end
 
-  scenario "Questions for an unregistered user" do
+  scenario 'Questions for an unregistered user' do
     expect(page).to have_content question.title
   end
 
-    given(:user) { create(:user) }
+  given(:user) { create(:user) }
 
-  scenario "Questions for a registered user" do
+  scenario 'Questions for a registered user' do
     sign_in(user)
     expect(page).to have_content question.title
-   end
   end
+end
