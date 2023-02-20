@@ -45,6 +45,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    (params[:question] || ActionController::Parameters.new).permit(:title, :body)
+    (params[:question] || ActionController::Parameters.new).permit(:title, :body, :file)
   end
 end
