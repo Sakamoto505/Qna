@@ -35,8 +35,6 @@ feature 'User can edit question', "
       expect(page).to have_link 'spec_helper.rb'
     end
 
-
-
     scenario 'edits question with errors' do
       visit question_path(question)
       within '.question' do
