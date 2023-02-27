@@ -10,4 +10,8 @@ FactoryBot.define do
   trait :invalid_answer do
     body { nil }
   end
+
+  trait :answer_with_file do
+    files { [Rack::Test::UploadedFile.new("#{Rails.root}/spec/rails_helper.rb", 'text/x-ruby')] }
+  end
 end
