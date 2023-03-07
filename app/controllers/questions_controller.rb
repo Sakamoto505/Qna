@@ -8,7 +8,10 @@ class QuestionsController < ApplicationController
     @questions = Question.all
   end
 
-  def new; end
+  def new
+    @question = Question.new
+    @question.links.new
+  end
 
   def create
     if @question.save
@@ -45,6 +48,7 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    (params[:question] || ActionController::Parameters.new).permit(:title, :body, files: [])
+    (params[:question] || ActionController::Parameters.new).permit(:title, :body, files: [],
+                                                            links_attributes: [:name, :url])
   end
 end
