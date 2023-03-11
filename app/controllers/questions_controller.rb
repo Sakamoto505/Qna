@@ -23,6 +23,7 @@ class QuestionsController < ApplicationController
 
   def show
     @answer = Answer.new
+    @answer.links.new
     @answers = @question.answers
     @best_answer = @question.best_answer
     @other_answers = @question.answers.where.not(id: @question.best_answer_id)
