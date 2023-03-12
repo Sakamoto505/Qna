@@ -6,10 +6,7 @@
     = render @question
 
   .links
-  p Links:
-  ul
-  - @question.links.each do |link|
-    li= link_to link.name, link.url
+    = render 'shared/gist'
 
   .answers
     h3 Best answer

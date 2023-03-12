@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-feature 'User can add links to question', %q{
+feature 'User can add links to question', "
   In order to provide additional info to my question
   As an question's author
   I'd like to be able to add links
-} do
-
+" do
   given(:user) { create(:user) }
-  given(:gist_url) { 'https://gist.github.com/Sakamoto505/590f834036d3ecf6cfafa425b67b1949' }
+  given(:question) { create(:question, author_id: user.id) }
+  given!(:link) { create(:link, linkable: question) }
 
   scenario 'User adds link when asks question' do
     sign_in(user)
@@ -16,11 +18,11 @@ feature 'User can add links to question', %q{
     fill_in 'Title', with: 'Test question'
     fill_in 'Body', with: 'text text text'
 
-    fill_in 'Link name', with: 'My gist'
-    fill_in 'Url', with: gist_url
+    fill_in 'Link name', with: link.name
+    fill_in 'Url', with: link.url
 
     click_on 'Ask'
 
-    expect(page).to have_link('My gist', href: gist_url)
+    expect(page).to have_link link.name
   end
 end

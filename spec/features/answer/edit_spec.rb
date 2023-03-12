@@ -42,7 +42,6 @@ feature 'User can edit answer', "
         attach_file 'Files', %W[#{Rails.root}/spec/rails_helper.rb #{Rails.root}/spec/spec_helper.rb]
         click_on 'Save'
       end
-
     end
 
     scenario 'edits answer with errors' do

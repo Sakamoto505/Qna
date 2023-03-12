@@ -46,6 +46,6 @@ class AnswersController < ApplicationController
 
   def answer_params
     (params[:answer] || ActionController::Parameters.new).permit(:body, files: [],
-                                                                 links_attributes: [:name, :url])
+                                                                        links_attributes: %i[name url])
   end
 end

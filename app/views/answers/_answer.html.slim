@@ -1,11 +1,15 @@
 
 div id="answer-#{answer.id}"
-  p= answer.body
+  mark= answer.body
+
   .links
-  p Links:
-  ul
-  - answer.links.each do |link|
-    li= link_to link.name, link.url
+    p Links:
+    ul
+    - answer.links.each do |link|
+      - if link.gist?
+        div class="gist" data-src="#{"#{link.url}.json"}"
+      - else
+        = link_to link.name, link.url
 
   - if answer.files.attached?
     - answer.files.each do |file|

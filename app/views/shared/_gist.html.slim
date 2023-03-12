@@ -1,0 +1,5 @@
+- @question.links.each do |link|
+  - if link.gist?
+    div class="gist" data-src="#{"#{link.url}.json"}"
+  - else
+    = link_to link.name, link.url

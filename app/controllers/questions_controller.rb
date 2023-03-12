@@ -17,7 +17,7 @@ class QuestionsController < ApplicationController
     if @question.save
       redirect_to @question, notice: 'Your question successfully created.'
     else
-      flash[:alert] = "Unable to save question: " + @question.errors.full_messages.join(', ')
+      flash[:alert] = "Unable to save question: #{@question.errors.full_messages.join(', ')}"
       render :new
     end
   end
@@ -51,6 +51,6 @@ class QuestionsController < ApplicationController
 
   def question_params
     (params[:question] || ActionController::Parameters.new).permit(:title, :body, files: [],
-                                                                   links_attributes: [:id, :name, :url, :_destroy])
+                                                                                  links_attributes: %i[id name url _destroy])
   end
 end
