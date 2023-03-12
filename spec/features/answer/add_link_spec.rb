@@ -18,11 +18,11 @@ feature 'User can add links to answer', %q{
     fill_in 'Body', with: '1212 1212'
 
     fill_in 'Link name', with: 'My gist'
-    fill_in 'Url', with: gist_url
+    fill_in 'Url', with: gist_url, match: :first
 
     click_on 'Answer'
 
-    within '.answers' do
+    within '.other-answers' do
       expect(page).to have_link 'My gist', href: gist_url
     end
   end

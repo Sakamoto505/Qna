@@ -10,8 +10,11 @@
   p
     = f.label :files
     = f.file_field :files, multiple: true
+  p Links:
+  #links
+    = f.fields_for :links do |link|
+      = render 'shared/link_fields', f: link
+    = link_to_add_association 'add link', f, :links, partial: 'shared/link_fields'
 
-    div class="links"
-      = link_to_add_association 'add link', f, :links
 
   p= f.submit 'Ask'

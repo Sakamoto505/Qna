@@ -1,5 +1,9 @@
 div
   - @questions.each do |question|
-    div= question.title
+    div.d-flex.justify-content-between
+      div.question-title
+        = question.title
+      div.delete-question
+        = link_to 'Delete', question_path(question), method: :delete, class: 'btn btn-outline-danger btn-sm'
 
-p= link_to 'Ask question', new_question_path
+p= link_to 'Ask question', new_question_path, class: 'btn btn-primary btn-sm'
