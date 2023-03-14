@@ -30,8 +30,11 @@ class AnswersController < ApplicationController
   end
 
   def update
-    @answer.update(answer_params) if current_user.is_owner?(@answer.author)
-    @question = @answer.question
+    if current_user.is_owner?(@answer.author)
+      @answer.links.destroy_all
+      @answer.update(answer_params)
+      @question = @answer.question
+  end
   end
 
   private

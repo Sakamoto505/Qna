@@ -6,3 +6,4 @@ require("turbolinks").start()
 
 require("packs/answers")
 require("packs/questions")
+

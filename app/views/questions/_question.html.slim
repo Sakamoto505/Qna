@@ -14,7 +14,7 @@
     | |
     = link_to 'Delete question', question_path(@question), method: :delete
 
-    = form_with model: @question, local: false, class: 'hidden', html: { id: "edit-question-#{@question.id}" } do |f|
+    = form_with model: @question, local: false, class: 'hidden', html: { id: "edit-question-#{question.id}" }, remote: true do |f|
       = f.label :title
       = f.text_field :title
 
@@ -23,5 +23,17 @@
 
       = f.label :files
       = f.file_field :files, multiple: true
+
+      fieldset
+        legend Links
+        - @question.links.each do |link|
+          div.link
+            = f.fields_for :links, link do |l|
+              = l.text_field :name, placeholder: 'Link name'
+              = l.text_field :url, placeholder: 'Link URL'
+        div.link
+          = f.fields_for :links, Link.new do |l|
+            = l.text_field :name, placeholder: 'Link name'
+            = l.text_field :url, placeholder: 'Link URL'
 
       = f.submit 'Save'

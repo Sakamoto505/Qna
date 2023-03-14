@@ -31,8 +31,9 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    @question.update(question_params) if current_user.is_owner?(@question.author)
+      @question.update(question_params) if current_user.is_owner?(@question.author)
   end
+
 
   def destroy
     if current_user.is_owner?(@question.author)

@@ -2,6 +2,10 @@
   div id="link-id-#{link.id}"
     - if link.gist?
       div class="gist" data-src="#{"#{link.url}.json"}"
-      = link_to link.name, link.url
+      li= link_to link.name, link.url
+      = link_to 'Remove', link_path(link), method: :delete, id: "link-#{link.id}", remote: true
+    - else
+      li= link_to link.name, link.url
       - if user_signed_in? && current_user.is_owner?(@question.author)
         = link_to 'Remove', link_path(link), method: :delete, id: "link-#{link.id}", remote: true
+
