@@ -16,7 +16,7 @@ h2
   .field
     = f.label :password_confirmation, "Confirm new password"
     br
-    = f.password_field :password_confirmation, autocomplete: "new-password"
+    = f.password_field :password_confirmation, autocomplete: 'new-password'
   .actions
     = f.submit 'Change my password'
 = render 'devise/shared/links'

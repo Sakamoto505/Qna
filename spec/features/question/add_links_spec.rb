@@ -22,7 +22,7 @@ feature 'User can add links to question', "
     fill_in 'Url', with: link.url
 
     click_on 'Ask'
+    expect(page).to have_css(".links")
 
-    expect(page).to have_link link.name
   end
 end

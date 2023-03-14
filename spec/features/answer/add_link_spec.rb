@@ -26,4 +26,16 @@ feature 'User can add links to answer', "
       expect(page).to have_link link.name
     end
   end
+
+  scenario 'User adds links when add answer with errors', js: true do
+    sign_in(user)
+    visit question_path(question)
+
+    fill_in 'Body', with: '1212 1212'
+    fill_in 'Url', with: 'google.ru'
+
+    click_on 'Answer'
+    expect(page).to have_content 'Links url is invalid'
+    expect(page).to have_content "Links name can't be blank"
+  end
 end
