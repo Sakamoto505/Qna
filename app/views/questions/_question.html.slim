@@ -2,6 +2,12 @@
   h1= @question.title
   p= @question.body
 
+  p reward:
+  - if @question.reward.present? && @question.reward.image.attached?
+    = @question.reward.name
+    p= image_tag @question.reward.image, width: '10%', height: 'auto'
+
+
   -if @question.files.attached?
     - @question.files.each do |file|
       p= link_to file.filename.to_s, url_for(file)
@@ -14,7 +20,7 @@
     | |
     = link_to 'Delete question', question_path(@question), method: :delete
 
-    = form_with model: @question, local: false, class: 'hidden', html: { id: "edit-question-#{question.id}" }, remote: true do |f|
+    = form_with model: @question, local: false, class: 'hidden', html: { id: "edit-question-#{@question.id}" }, remote: true do |f|
       = f.label :title
       = f.text_field :title
 

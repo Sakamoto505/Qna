@@ -24,7 +24,7 @@ class AnswersController < ApplicationController
   end
 
   def set_best
-    @answer.mark_as_best if current_user.is_owner?(@answer.author)
+    @answer.mark_as_best if current_user.is_owner?(@answer.question.author) # здесь должен быть автор вопроса, а не автор ответа
     @question = @answer.question
     @question.save
   end

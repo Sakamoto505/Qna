@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    title Награды пользователя
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body
+    .container
+      h3.text-center.mb-4 Награды пользователя
+
+      .row
+        - @rewards.each do |reward|
+          .col-md-4.mb-4
+            .card
+              - if reward.image.attached?
+                = image_tag(reward.image, class: 'card-img-top', width: '10%', height: 'auto')
+              - else
+                .card-img-placeholder.text-center Нет изображения
+              .card-body
+                h5.card-title= reward.question.title
+                p.card-text= reward.name
+      - if @rewards.blank?
+        .col-12.text-center
+          p Нет наград для отображения
+
+= link_to 'Назад к списку всех вопросов', questions_path(@question), class: 'btn btn-primary'
