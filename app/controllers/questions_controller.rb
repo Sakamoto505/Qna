@@ -12,7 +12,6 @@ class QuestionsController < ApplicationController
     @question = Question.new
     @question.links.new
     @question.build_reward
-
   end
 
   def create
@@ -33,9 +32,8 @@ class QuestionsController < ApplicationController
   end
 
   def update
-      @question.update(question_params) if current_user.is_owner?(@question.author)
+    @question.update(question_params) if current_user.is_owner?(@question.author)
   end
-
 
   def destroy
     if current_user.is_owner?(@question.author)
@@ -55,6 +53,6 @@ class QuestionsController < ApplicationController
   def question_params
     (params[:question] || ActionController::Parameters.new).permit(:title, :body, files: [],
                                                                                   links_attributes: %i[id name url _destroy],
-                                                                   reward_attributes: [:name, :image])
+                                                                                  reward_attributes: %i[name image])
   end
 end

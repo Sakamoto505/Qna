@@ -24,17 +24,18 @@ class AnswersController < ApplicationController
   end
 
   def set_best
-    @answer.mark_as_best if current_user.is_owner?(@answer.question.author) # здесь должен быть автор вопроса, а не автор ответа
+    # здесь должен быть автор вопроса, а не автор ответа
+    @answer.mark_as_best if current_user.is_owner?(@answer.question.author)
     @question = @answer.question
     @question.save
   end
 
   def update
-    if current_user.is_owner?(@answer.author)
-      @answer.links.destroy_all
-      @answer.update(answer_params)
-      @question = @answer.question
-  end
+    return unless current_user.is_owner?(@answer.author)
+
+    @answer.links.destroy_all
+    @answer.update(answer_params)
+    @question = @answer.question
   end
 
   private

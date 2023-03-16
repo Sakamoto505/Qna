@@ -48,6 +48,7 @@ gem 'bootsnap', require: false
 gem 'cocoon'
 gem 'devise'
 gem 'rubocop'
+gem 'rubocop-slim', '~> 0.2.2'
 gem 'slim-rails'
 gem 'twitter-bootstrap-rails'
 
@@ -80,5 +81,3 @@ group :test do
   gem 'shoulda-matchers', '~> 3.1'
   gem 'webdrivers'
 end
-
-gem 'rubocop-slim', '~> 0.2.2'
