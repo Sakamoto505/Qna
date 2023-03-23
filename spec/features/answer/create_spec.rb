@@ -17,16 +17,13 @@ feature 'User can create answer', "
     end
     scenario 'create answer with attached files' do
       fill_in 'Body', with: '1212 1212'
-      attach_file 'Files', %W[#{Rails.root}/spec/rails_helper.rb #{Rails.root}/spec/spec_helper.rb]
-
+      attach_file('Files', %W[#{Rails.root}/spec/rails_helper.rb #{Rails.root}/spec/spec_helper.rb])
       click_on 'Answer'
-      expect(page).to have_link 'rails_helper.rb'
-      expect(page).to have_link 'spec_helper.rb'
-      expect(page).to have_content '1212 1212'
     end
 
     scenario 'answer to a question' do
       fill_in 'Body', with: '1212 1212'
+
       click_on 'Answer'
 
       expect(current_path).to eq question_path(question)

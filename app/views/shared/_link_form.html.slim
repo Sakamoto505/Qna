@@ -1,0 +1,11 @@
+fieldset
+  legend Links
+  - object.links.each do |link|
+    div.link
+      = fields_for :links, link do |l|
+        = l.text_field :name, placeholder: 'Link name'
+        = l.text_field :url, placeholder: 'Link URL'
+  div.link
+    = fields_for :links, Link.new do |l|
+      = l.text_field :name, placeholder: 'Link name'
+      = l.text_field :url, placeholder: 'Link URL'

@@ -1,0 +1,10 @@
+exclude:
+  - 'vendor/**/*'
+  - 'tmp/**/*'
+
+linters:
+  LineLength:
+    enabled: true
+    max: 120
+  RedundantDiv:
+    enabled: false

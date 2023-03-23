@@ -45,9 +45,10 @@ gem 'bootsnap', require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
+gem 'cocoon'
 gem 'devise'
 gem 'rubocop'
-gem 'rubocop-rails'
+gem 'rubocop-slim', '~> 0.2.2'
 gem 'slim-rails'
 gem 'twitter-bootstrap-rails'
 
@@ -74,6 +75,7 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'launchy'
+  gem 'rack-cors'
   gem 'rails-controller-testing'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 3.1'

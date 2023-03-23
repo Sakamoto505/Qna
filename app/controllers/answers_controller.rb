@@ -24,13 +24,17 @@ class AnswersController < ApplicationController
   end
 
   def set_best
-    @answer.mark_as_best if current_user.is_owner?(@answer.author)
+    # здесь должен быть автор вопроса, а не автор ответа
+    @answer.mark_as_best if current_user.is_owner?(@answer.question.author)
     @question = @answer.question
     @question.save
   end
 
   def update
-    @answer.update(answer_params) if current_user.is_owner?(@answer.author)
+    return unless current_user.is_owner?(@answer.author)
+
+    @answer.links.destroy_all
+    @answer.update(answer_params)
     @question = @answer.question
   end
 
@@ -45,6 +49,7 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    (params[:answer] || ActionController::Parameters.new).permit(:body, files: [])
+    (params[:answer] || ActionController::Parameters.new).permit(:body, files: [],
+                                                                        links_attributes: %i[name url])
   end
 end

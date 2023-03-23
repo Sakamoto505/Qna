@@ -1,23 +1,50 @@
 
 div id="answer-#{answer.id}"
-  p= answer.body
+
+  mark= answer.body
+
+  .links
+    ul
+      - answer.links.each do |link|
+        div id="link-id-#{link.id}"
+          = link_to link.name, link.url
+          br
+          = link_to 'Remove', link_path(link), method: :delete, id: "link-#{link.id}", remote: true
+
   - if answer.files.attached?
     - answer.files.each do |file|
       p= link_to file.filename.to_s, url_for(file)
+
       p= link_to 'Delete file', attachment_path(file.id), method: :delete, remote: true
 
   - if user_signed_in? && current_user.is_owner?(@question.author)
     = link_to 'Edit answer', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
     '| |
+
     = link_to 'Delete answer', answer_path(answer), remote: true, class: 'delete-answer-link', data: { answer_id: answer.id }, method: :delete
     '| |
+
     = link_to 'Best', set_best_answer_path(answer), remote: true, class: 'best-answer-link', data: { answer_id: answer.id }, method: :patch
+    h1
 
     = form_with model: answer, local: false, class: 'hidden', html: { id: "edit-answer-#{answer.id}" } do |f|
       = f.label :body, 'Your answer'
       = f.text_area :body
+      p
+        = f.label :files
+        = f.file_field :files, multiple: true
 
-      = f.label :files
-      = f.file_field :files, multiple: true
+      fieldset
+        legend Links
+        - answer.links.each do |link|
+          div.link
+            = f.fields_for :links, link do |l|
+              = l.text_field :name, placeholder: 'Link name'
+              = l.text_field :url, placeholder: 'Link URL'
+        div.link
+          = f.fields_for :links, Link.new do |l|
+            = l.text_field :name, placeholder: 'Link name'
+            = l.text_field :url, placeholder: 'Link URL'
 
-      = f.submit 'Save'
+        = f.submit 'Save'
+

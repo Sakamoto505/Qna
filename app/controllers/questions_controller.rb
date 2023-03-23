@@ -8,18 +8,24 @@ class QuestionsController < ApplicationController
     @questions = Question.all
   end
 
-  def new; end
+  def new
+    @question = Question.new
+    @question.links.new
+    @question.build_reward
+  end
 
   def create
     if @question.save
       redirect_to @question, notice: 'Your question successfully created.'
     else
+      flash[:alert] = "Unable to save question: #{@question.errors.full_messages.join(', ')}"
       render :new
     end
   end
 
   def show
     @answer = Answer.new
+    @answer.links.new
     @answers = @question.answers
     @best_answer = @question.best_answer
     @other_answers = @question.answers.where.not(id: @question.best_answer_id)
@@ -45,6 +51,8 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    (params[:question] || ActionController::Parameters.new).permit(:title, :body, files: [])
+    (params[:question] || ActionController::Parameters.new).permit(:title, :body, files: [],
+                                                                                  links_attributes: %i[id name url _destroy],
+                                                                                  reward_attributes: %i[name image])
   end
 end
