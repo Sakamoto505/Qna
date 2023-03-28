@@ -3,6 +3,10 @@ div id="answer-#{answer.id}"
 
   mark= answer.body
 
+  p Rating:
+  = render 'shared/voted', resource: answer
+
+
   .links
     ul
       - answer.links.each do |link|

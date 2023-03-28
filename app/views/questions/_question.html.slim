@@ -2,6 +2,13 @@
   h1= @question.title
   p= @question.body
 
+  p Rating:
+  = render 'shared/voted', resource: question
+
+  .question_links
+    = render 'shared/gist'
+
+
   p reward:
   - if @question.reward.present? && @question.reward.image.attached?
     = @question.reward.name

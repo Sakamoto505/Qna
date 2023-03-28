@@ -1,0 +1,26 @@
+.upvote, .downvote {
+    background: none;
+    border: none;
+    display: inline-block;
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.upvote:hover, .downvote:hover {
+    color: #333;
+}
+
+.cancel-vote {
+    background: none;
+    border: none;
+    display: inline-block;
+    font-size: 14px;
+    color: #999;
+    cursor: pointer;
+}
+
+.cancel-vote:hover {
+    color: #333;
+}

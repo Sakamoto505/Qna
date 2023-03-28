@@ -27,7 +27,7 @@ feature 'User can create answer', "
       click_on 'Answer'
 
       expect(current_path).to eq question_path(question)
-      within '.other-answers' do # чтобы убедиться, что ответ в списке, а не в форме
+      within '.answers' do # чтобы убедиться, что ответ в списке, а не в форме
         expect(page).to have_content '1212 1212'
       end
     end

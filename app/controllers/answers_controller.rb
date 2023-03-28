@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AnswersController < ApplicationController
+  include Voted
+
   before_action :authenticate_user!, except: %i[index]
   before_action :find_question, only: %i[new create]
   before_action :answer, only: %i[update destroy set_best]
@@ -20,8 +22,6 @@ class AnswersController < ApplicationController
   def create
     @answer = @question.answers.new(answer_params)
     @answer.author = current_user
-    @answer.save
-
     respond_to do |format|
       if @answer.save
         format.json { render json: @answer }
