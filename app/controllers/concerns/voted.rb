@@ -6,7 +6,6 @@ module Voted
   included do
     before_action :authenticate_user!
     before_action :set_votable, only: %i[like dislike cancel]
-    before_action :check_author, only: %i[like dislike cancel]
   end
 
   def like
@@ -31,12 +30,6 @@ module Voted
 
   def model_klass
     controller_name.classify.constantize
-  end
-
-  def check_author
-    return unless current_user.is_owner?(@votable)
-
-    render json: { error: 'You cannot vote for your own post.' }, status: :unprocessable_entity
   end
 
   def voted(value)

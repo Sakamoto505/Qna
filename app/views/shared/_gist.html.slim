@@ -7,5 +7,5 @@
     - else
 
       li= link_to link.name, link.url
-      - if user_signed_in? && current_user.is_owner?(@question.author)
+      - if user_signed_in? && current_user.is_owner?(@question)
         = link_to 'Remove', link_path(link), method: :delete, id: "link-#{link.id}", remote: true

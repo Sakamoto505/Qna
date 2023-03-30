@@ -34,11 +34,11 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    @question.update(question_params) if current_user.is_owner?(@question.author)
+    @question.update(question_params) if current_user.is_owner?(@question)
   end
 
   def destroy
-    if current_user.is_owner?(@question.author)
+    if current_user.is_owner?(@question)
       @question.destroy
       redirect_to questions_path, notice: 'Question was successfully deleted'
     else

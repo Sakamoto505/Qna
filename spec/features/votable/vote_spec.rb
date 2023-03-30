@@ -14,7 +14,7 @@ feature 'User can vote for the answer or question', "
 
   describe 'Authenticated user_not_author', js: true do
     background do
-      sign_in(user)
+      sign_in(user_not_author)
       visit question_path(question)
     end
 

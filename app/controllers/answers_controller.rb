@@ -16,7 +16,7 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    @answer.destroy if current_user.is_owner?(@answer.author)
+    @answer.destroy if current_user.is_owner?(@answer)
   end
 
   def create
@@ -35,13 +35,13 @@ class AnswersController < ApplicationController
 
   def set_best
     # здесь должен быть автор вопроса, а не автор ответа
-    @answer.mark_as_best if current_user.is_owner?(@answer.question.author)
+    @answer.mark_as_best if current_user.is_owner?(@answer.question)
     @question = @answer.question
     @question.save
   end
 
   def update
-    return unless current_user.is_owner?(@answer.author)
+    return unless current_user.is_owner?(@answer)
 
     @answer.links.destroy_all
     @answer.update(answer_params)
