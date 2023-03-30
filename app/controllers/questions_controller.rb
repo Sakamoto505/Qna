@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class QuestionsController < ApplicationController
+  include Voted
+
   before_action :authenticate_user!, except: %i[index show]
   before_action :question, except: [:index]
 
@@ -32,11 +34,11 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    @question.update(question_params) if current_user.is_owner?(@question.author)
+    @question.update(question_params) if current_user.is_owner?(@question)
   end
 
   def destroy
-    if current_user.is_owner?(@question.author)
+    if current_user.is_owner?(@question)
       @question.destroy
       redirect_to questions_path, notice: 'Question was successfully deleted'
     else

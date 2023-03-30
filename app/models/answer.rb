@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Answer < ApplicationRecord
+  include Votable
+
   has_many_attached :files
   has_many :links, dependent: :destroy, as: :linkable
 
