@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
 class QuestionsController < ApplicationController
+
   include Voted
 
   before_action :authenticate_user!, except: %i[index show]
   before_action :question, except: [:index]
+
+  after_action :publish_question, only: [:create]
+  before_action :gon_variables, only: :show
 
   def index
     @questions = Question.all
@@ -31,6 +35,7 @@ class QuestionsController < ApplicationController
     @answers = @question.answers
     @best_answer = @question.best_answer
     @other_answers = @question.answers.where.not(id: @question.best_answer_id)
+    # set_gon
   end
 
   def update
@@ -48,8 +53,30 @@ class QuestionsController < ApplicationController
 
   private
 
+
+  def publish_question
+    return if @question.errors.any?
+
+    ActionCable.server.broadcast(
+      'questions',
+      ApplicationController.render(
+        partial: 'questions/question_for_channel',
+        locals: { question: @question }
+      )
+    )
+  end
+  # def set_gon
+  #   gon.question_id = @question.id
+  #   gon.current_user_id = current_user&.id
+  # end
+
+  def gon_variables
+    gon.question_id = @question.id
+    gon.user_id = current_user.id if current_user
+  end
   def question
     @question = params[:id] ? Question.with_attached_files.find(params[:id]) : current_user.questions.new(question_params)
+
   end
 
   def question_params

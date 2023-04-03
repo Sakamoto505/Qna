@@ -1,9 +1,9 @@
 
-  h1= @question.title
-  p= @question.body
-
-  p Rating:
+.question
+  h1= question.title
+  p= question.body
   = render 'shared/voted', resource: question
+
 
   .question_links
     = render 'shared/gist'

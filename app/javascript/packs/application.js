@@ -7,4 +7,6 @@ require("turbolinks").start()
 require("packs/answers")
 require("packs/questions")
 require("packs/vote")
+require("channels")
+
 

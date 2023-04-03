@@ -9,4 +9,5 @@ require("@nathanvda/cocoon")
 //= require jquery_ujs
 //= require turbolinks
 //= require twitter/bootstrap
+//= require action_cable
 //= require_tree .
