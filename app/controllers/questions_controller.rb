@@ -35,7 +35,6 @@ class QuestionsController < ApplicationController
     @answers = @question.answers
     @best_answer = @question.best_answer
     @other_answers = @question.answers.where.not(id: @question.best_answer_id)
-    # set_gon
   end
 
   def update
@@ -65,6 +64,7 @@ class QuestionsController < ApplicationController
       )
     )
   end
+
   # def set_gon
   #   gon.question_id = @question.id
   #   gon.current_user_id = current_user&.id

@@ -1,3 +1,5 @@
+
+
 import consumer from "./consumer"
 
 consumer.subscriptions.create({channel: "QuestionsChannel"}, {
@@ -7,8 +9,6 @@ consumer.subscriptions.create({channel: "QuestionsChannel"}, {
   },
 
   received(data) {
-    console.log('123123');
-
     $('.questions').append(data);
   }
 });
