@@ -65,14 +65,9 @@ class QuestionsController < ApplicationController
     )
   end
 
-  # def set_gon
-  #   gon.question_id = @question.id
-  #   gon.current_user_id = current_user&.id
-  # end
-
   def gon_variables
     gon.question_id = @question.id
-    gon.user_id = current_user.id if current_user
+    gon.author = current_user.id if current_user
   end
   def question
     @question = params[:id] ? Question.with_attached_files.find(params[:id]) : current_user.questions.new(question_params)

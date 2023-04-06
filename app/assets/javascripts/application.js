@@ -10,4 +10,6 @@ require("@nathanvda/cocoon")
 //= require turbolinks
 //= require twitter/bootstrap
 //= require action_cable
+//= require gon
+//= require_tree ./templates
 //= require_tree .

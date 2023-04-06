@@ -1,0 +1,49 @@
+<div id="answer-{{answer.id}}">
+    <mark>{{answer.body}}</mark>
+    <p>Rating:</p>
+    <div class="vote">
+        <a data-type="json" class="upvote" data-remote="true" rel="nofollow" data-method="patch" href="/answers/{{answer.id}}/like">+</a>
+        <a data-type="json" class="downvote" data-remote="true" rel="nofollow" data-method="patch" href="/answers/{{answer.id}}/dislike">-</a>
+        <a data-type="json" class="cancel-vote" data-remote="true" rel="nofollow" data-method="delete" href="/answers/{{answer.id}}/cancel">Cancel vote</a>
+    </div>
+    <div id="answer-rating-{{answer.id}}">{{rating}}</div>
+    <div class="links">
+        <ul>
+            {{#each links}}
+                <div id="link-id-{{this.id}}">
+                    <a href="{{this.url}}">{{this.name}}</a><br>
+                        <a id="link-{{this.id}}" data-remote="true" rel="nofollow" data-method="delete" href="/links/{{this.id}}">Remove</a>
+                </div>
+            {{/each}}
+        </ul>
+    </div>
+<!--        <a class="edit-answer-link" data-answer-id="{{answer.id}}" href="#">Edit answer</a> | |-->
+<!--        <a class="delete-answer-link" data-answer-id="{{answer.id}}" data-remote="true" rel="nofollow" data-method="delete" href="/answers/{{answer.id}}">Delete answer</a> | |-->
+<!--        <a class="best-answer-link" data-answer-id="{{answer.id}}" data-remote="true" rel="nofollow" data-method="patch" href="/answers/{{answer.id}}/set_best">Best</a>-->
+<!--    <h1></h1>-->
+<!--        <form class="hidden" id="edit-answer-{{answer.id}}" enctype="multipart/form-data" action="/answers/{{answer.id}}" accept-charset="UTF-8" data-remote="true" method="post">-->
+<!--            <input type="hidden" name="_method" value="patch" autocomplete="off">-->
+<!--            <input type="hidden" name="authenticity_token" value="{{form_authenticity_token}}" autocomplete="off">-->
+<!--            <label for="answer_body">Your answer</label>-->
+<!--            <textarea name="answer[body]" id="answer_body">{{answer.body}}</textarea>-->
+<!--            <p>-->
+<!--                <label for="answer_files">Files</label>-->
+<!--                <input multiple="multiple" type="file" name="answer[files][]" id="answer_files">-->
+<!--            </p>-->
+<!--            <fieldset>-->
+<!--                <legend>Links</legend>-->
+<!--                {{#each links}}-->
+<!--                    <div class="link">-->
+<!--                        <input placeholder="Link name" type="text" name="answer[links_attributes][0][name]" id="answer_links_attributes_0_name">-->
+<!--                        <input placeholder="Link URL" type="text" name="answer[links_attributes][0][url]" id="answer_links_attributes_0_url">-->
+<!--                        {{#if this.id}}-->
+<!--                            <a id="link-{{this.id}}" data-remote="true" rel="nofollow" data-method="delete" href="/links/{{this.id}}">Remove</a>-->
+<!--                        {{/if}}-->
+<!--                    </div>-->
+<!--                {{/each}}-->
+<!--                <input type="submit" name="commit" value="Save" data-disable-with="Save">-->
+<!--            </fieldset>-->
+<!--        </form>-->
+</div>
+
+

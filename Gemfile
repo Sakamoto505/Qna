@@ -47,6 +47,7 @@ gem 'bootsnap', require: false
 # gem "image_processing", "~> 1.2"
 gem 'cocoon'
 gem 'gon'
+gem 'handlebars-source'
 gem 'devise'
 gem 'rubocop'
 gem 'rubocop-slim', '~> 0.2.2'

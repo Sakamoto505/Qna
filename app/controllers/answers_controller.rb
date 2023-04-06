@@ -53,14 +53,13 @@ class AnswersController < ApplicationController
 
   def publish_answer
     return if @answer.errors.any?
-
-    AnswersChannel.broadcast(
-      "answer_#{params[:question_id]}",
-      ApplicationController.render(
-        partial: 'answers/answer',
-        locals: { answer: @answer }
-      )
-    )
+      ActionCable.server.broadcast(
+                                "answer_#{find_question.id}",
+                                 author: current_user.email,
+                                 rating: @answer.rating,
+                                 links: @answer.links,
+                                 answer: @answer,
+                                )
   end
 
   def find_question
