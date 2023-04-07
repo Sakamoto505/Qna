@@ -1,0 +1,20 @@
+= form_with model: answer, local: false, class: 'hidden', html: { id: "edit-answer-#{answer.id}" } do |f|
+  = f.label :body, 'Your answer'
+  = f.text_area :body
+  p
+    = f.label :files
+    = f.file_field :files, multiple: true
+
+  fieldset
+    legend Links
+    - answer.links.each do |link|
+      div.link
+        = f.fields_for :links, link do |l|
+          = l.text_field :name, placeholder: 'Link name'
+          = l.text_field :url, placeholder: 'Link URL'
+    div.link
+      = f.fields_for :links, Link.new do |l|
+        = l.text_field :name, placeholder: 'Link name'
+        = l.text_field :url, placeholder: 'Link URL'
+
+    = f.submit 'Save'

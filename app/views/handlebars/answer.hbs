@@ -6,6 +6,7 @@
         <a data-type="json" class="downvote" data-remote="true" rel="nofollow" data-method="patch" href="/answers/{{answer.id}}/dislike">-</a>
         <a data-type="json" class="cancel-vote" data-remote="true" rel="nofollow" data-method="delete" href="/answers/{{answer.id}}/cancel">Cancel vote</a>
     </div>
+    </div>
     <div id="answer-rating-{{answer.id}}">{{rating}}</div>
     <div class="links">
         <ul>
@@ -17,11 +18,6 @@
             {{/each}}
         </ul>
     </div>
-        <a class="edit-answer-link" data-answer-id="{{answer.id}}" href="#">Edit answer</a> | |
-        <a class="delete-answer-link" data-answer-id="{{answer.id}}" data-remote="true" rel="nofollow" data-method="delete" href="/answers/{{answer.id}}">Delete answer</a> | |
-{{#if is_question_owner}}
-    <a class="best-answer-link" data-answer-id="{{answer.id}}" data-remote="true" rel="nofollow" data-method="patch" href="/answers/{{answer.id}}/set_best">Best</a>
-{{/if}}
     <h1></h1>
         <form class="hidden" id="edit-answer-{{answer.id}}" enctype="multipart/form-data" action="/answers/{{answer.id}}" accept-charset="UTF-8" data-remote="true" method="post">
             <input type="hidden" name="_method" value="patch" autocomplete="off">
