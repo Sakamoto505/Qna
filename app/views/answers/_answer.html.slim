@@ -25,6 +25,8 @@ div id="answer-#{answer.id}"
     = link_to 'Edit answer', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
     '| |
     = link_to 'Delete answer', answer_path(answer), remote: true, class: 'delete-answer-link', data: { answer_id: answer.id }, method: :delete
+
+  - if user_signed_in? && current_user.is_owner?(@question)
     '| |
     = link_to 'Best', set_best_answer_path(answer), remote: true, class: 'best-answer-link', data: { answer_id: answer.id }, method: :patch
     h1
