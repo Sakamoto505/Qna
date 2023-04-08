@@ -2,6 +2,7 @@
 
 class Answer < ApplicationRecord
   include Votable
+  include Commentable
 
   has_many_attached :files
   has_many :links, dependent: :destroy, as: :linkable
