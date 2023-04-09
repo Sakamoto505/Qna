@@ -19,7 +19,7 @@ feature 'User can vote for the answer or question', "
     end
 
     scenario 'like for the another question' do
-      within '.question' do
+      within all('.question').last do
         click_on '+'
 
         expect(page).to have_content '1'
@@ -27,7 +27,7 @@ feature 'User can vote for the answer or question', "
     end
 
     scenario 'dislike for the another question' do
-      within '.question' do
+      within all('.question').last do
         click_on '-'
 
         expect(page).to have_content '-1'
@@ -35,7 +35,7 @@ feature 'User can vote for the answer or question', "
     end
 
     scenario 'cancel vote for the another question' do
-      within '.question' do
+      within all('.question').last do
         click_on '+'
         expect(page).to have_content '1'
 

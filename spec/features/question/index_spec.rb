@@ -16,7 +16,7 @@ feature 'User can see questions and answers', "
   describe 'With answers' do
     given(:question) { create(:question, :with_answers) }
     scenario 'user sees question and answers' do
-      expect(page).to have_content(question.answers.first.body, count: 3)
+      expect(page).to have_content(question.answers.first.body, count: 6)
     end
   end
 end

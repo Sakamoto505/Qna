@@ -2,6 +2,7 @@
 
 class AnswersController < ApplicationController
   include Voted
+  include Commented
 
   before_action :authenticate_user!, except: %i[index]
   before_action :find_question, only: %i[new create]
@@ -17,7 +18,7 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    @answer.destroy if current_user.is_owner?(@answer)
+    @answer.destroy
   end
 
   def create

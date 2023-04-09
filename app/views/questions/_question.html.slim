@@ -8,6 +8,8 @@
   .question_links
     = render 'shared/gist'
 
+  = render 'shared/comments', commentable: question
+  = render 'shared/comment_form', commentable: question
 
   p reward:
   - if @question.reward.present? && @question.reward.image.attached?

@@ -1,17 +1,16 @@
+$(document).on('turbolinks:load', function(){
+    $('.answers').on('click', '.edit-answer-link', function(e) {
+        e.preventDefault();
+        $(this).hide();
+        let answerId = $(this).data('answerId');
+        $('form#edit-answer-' + answerId).removeClass('hidden');
+    });
 
-    $(document).on('turbolinks:load', function() {
-        // Обработчик успешной отправки формы с новым ответом
-        $('form.new-answer').on('ajax:success', function(e) {
-            let answer = e.detail[0];
+    $('form.new-answer').on('ajax:success', function(e) {
+        let answer = e.detail[0];
 
-        // Добавление нового ответа на страницу
-        $('.answers').append(`
-      <div class="answer" id="${answer.id}">
-        <p>${answer.body}</p>
-      </div>
-    `);
+        $('.answers').append(`<p id="${answer.id}">` + answer.body + '</p>');
     })
-        // Обработчик ошибки отправки формы с новым ответом
         .on('ajax:error', function(e) {
             $('.answer-errors').empty();
             let errors = e.detail[0];
@@ -21,4 +20,3 @@
             })
         })
 });
-

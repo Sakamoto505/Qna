@@ -15,10 +15,8 @@ feature 'User can edit links to question', "
     scenario 'Author can edit link' do
       sign_in(user)
       visit question_path(question)
-
-      within '.question' do
+      within all('.question').last do
         click_on 'Edit question'
-
         find('input[name="question[links_attributes][0][name]"]').set(link.name)
         find('input[name="question[links_attributes][0][url]"]').set(link.url)
         click_on 'Save'

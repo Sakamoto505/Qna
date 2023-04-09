@@ -3,6 +3,7 @@
 class QuestionsController < ApplicationController
 
   include Voted
+  include Commented
 
   before_action :authenticate_user!, except: %i[index show]
   before_action :question, except: [:index]
