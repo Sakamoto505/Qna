@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
 class QuestionsController < ApplicationController
+
   include Voted
+  include Commented
 
   before_action :authenticate_user!, except: %i[index show]
   before_action :question, except: [:index]
+
+  after_action :publish_question, only: [:create]
+  before_action :gon_variables, only: :show
 
   def index
     @questions = Question.all
@@ -48,8 +53,26 @@ class QuestionsController < ApplicationController
 
   private
 
+
+  def publish_question
+    return if @question.errors.any?
+
+    ActionCable.server.broadcast(
+      'questions',
+      ApplicationController.render(
+        partial: 'questions/question_for_channel',
+        locals: { question: @question }
+      )
+    )
+  end
+
+  def gon_variables
+    gon.question_id = @question.id
+    gon.author = current_user.id if current_user
+  end
   def question
     @question = params[:id] ? Question.with_attached_files.find(params[:id]) : current_user.questions.new(question_params)
+
   end
 
   def question_params

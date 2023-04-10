@@ -1,0 +1,13 @@
+- if current_user
+
+
+- if current_user
+    = form_with scope: :comment, url: polymorphic_path(commentable, action: 'comment'), class: 'new-comment-form my-custom-form',
+            html: { id: "new-comment-#{commentable.id}" }, local: false, data: { type: :json } do |f|
+        .form-row
+            = label_tag 'comment_body', 'Your comment'
+            .col-auto
+                = f.text_area :body, id: 'comment_body'
+            .col-auto
+                = f.submit 'Save Comment', class: 'btn btn-primary btn-circle ml-2'
+

@@ -19,7 +19,7 @@ feature 'User can edit question', "
 
     scenario 'edits his question' do
       visit question_path(question)
-      within '.question' do
+      within all('.question').last do
         click_on 'Edit question'
         fill_in 'Title', with: 'Test question'
         fill_in 'Body', with: 'text text text?'
@@ -33,7 +33,7 @@ feature 'User can edit question', "
 
     scenario 'edits question with errors' do
       visit question_path(question)
-      within '.question' do
+      within all('.question').last do
         click_on 'Edit question'
         fill_in 'Title', with: ''
         click_on 'Save'

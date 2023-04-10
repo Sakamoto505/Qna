@@ -9,7 +9,7 @@ $(document).on('turbolinks:load', function(){
     $('form.new-answer').on('ajax:success', function(e) {
         let answer = e.detail[0];
 
-        $('.answers').append('<p>' + answer.body + '</p>');
+        $('.answers').append(`<p id="${answer.id}">` + answer.body + '</p>');
     })
         .on('ajax:error', function(e) {
             $('.answer-errors').empty();

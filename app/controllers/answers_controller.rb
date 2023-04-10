@@ -2,10 +2,12 @@
 
 class AnswersController < ApplicationController
   include Voted
+  include Commented
 
   before_action :authenticate_user!, except: %i[index]
   before_action :find_question, only: %i[new create]
   before_action :answer, only: %i[update destroy set_best]
+  after_action :publish_answer, only: [:create]
 
   def index
     @answers = @question.answers
@@ -16,7 +18,7 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    @answer.destroy if current_user.is_owner?(@answer)
+    @answer.destroy
   end
 
   def create
@@ -49,6 +51,16 @@ class AnswersController < ApplicationController
   end
 
   private
+
+  def publish_answer
+    return if @answer.errors.any?
+
+    ActionCable.server.broadcast("answer_#{find_question.id}",
+                                 author: current_user.email,
+                                 rating: @answer.rating,
+                                 links: @answer.links,
+                                 answer: @answer)
+  end
 
   def find_question
     @question = Question.find(params[:question_id])
