@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class QuestionsController < ApplicationController
-
   include Voted
   include Commented
 
@@ -53,7 +52,6 @@ class QuestionsController < ApplicationController
 
   private
 
-
   def publish_question
     return if @question.errors.any?
 
@@ -70,9 +68,9 @@ class QuestionsController < ApplicationController
     gon.question_id = @question.id
     gon.author = current_user.id if current_user
   end
+
   def question
     @question = params[:id] ? Question.with_attached_files.find(params[:id]) : current_user.questions.new(question_params)
-
   end
 
   def question_params

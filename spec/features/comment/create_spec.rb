@@ -1,15 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-feature 'User can comment question/answer', %q{
+feature 'User can comment question/answer', "
   In order to add comment to community
   As an authenticated user
   I'd like to be able to comment to question/answer
-} do
-
+" do
   given(:user) { create(:user) }
   given(:question) { create(:question, author: user) }
   given!(:answer) { create(:answer, author: user, question: question) }
-
 
   describe 'Authenticated user', js: true do
     background do
@@ -35,7 +35,6 @@ feature 'User can comment question/answer', %q{
         expect(page).to have_content 'simple comment'
       end
     end
-
 
     context 'multiple sessions', js: true do
       scenario 'comment appears on another user\'s page' do
