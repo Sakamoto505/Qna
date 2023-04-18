@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Commented
   extend ActiveSupport::Concern
 
@@ -21,8 +23,8 @@ module Commented
           render json: [errors: @comment.errors.full_messages,
                         comment: @comment],
                  status: :unprocessable_entity
+        end
       end
-    end
     end
   end
 
