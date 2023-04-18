@@ -43,6 +43,7 @@ class AnswersController < ApplicationController
   end
 
   def update
+    authorize @answer
     return unless current_user.is_owner?(@answer)
 
     @answer.links.destroy_all

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include Pundit
   before_action :gon_user, unless: :devise_controller?
 
   private
