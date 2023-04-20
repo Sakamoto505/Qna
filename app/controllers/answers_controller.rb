@@ -8,6 +8,8 @@ class AnswersController < ApplicationController
   before_action :find_question, only: %i[new create]
   before_action :answer, only: %i[update destroy set_best]
   after_action :publish_answer, only: [:create]
+  # before_action :authorize_answer, only: %i[update]
+
 
   def index
     @answers = @question.answers
@@ -18,6 +20,8 @@ class AnswersController < ApplicationController
   end
 
   def destroy
+    authorize @answer
+
     @answer.destroy
   end
 
@@ -36,15 +40,15 @@ class AnswersController < ApplicationController
   end
 
   def set_best
-    # здесь должен быть автор вопроса, а не автор ответа
-    @answer.mark_as_best if current_user.is_owner?(@answer.question)
+    authorize @answer
+    @answer.mark_as_best
     @question = @answer.question
     @question.save
   end
 
   def update
+    @answer = Answer.find(params[:id])
     authorize @answer
-    return unless current_user.is_owner?(@answer)
 
     @answer.links.destroy_all
     @answer.update(answer_params)
@@ -74,5 +78,9 @@ class AnswersController < ApplicationController
   def answer_params
     (params[:answer] || ActionController::Parameters.new).permit(:body, files: [],
                                                                         links_attributes: %i[name url])
+  end
+
+  def authorize_answer
+    authorize @answer
   end
 end

@@ -24,17 +24,17 @@ div id="answer-#{answer.id}"
 
         p= link_to 'Delete file', attachment_path(file.id), method: :delete, remote: true
 
-    - if user_signed_in? && current_user.is_owner?(answer)
+    - if policy(answer).update?
       = link_to 'Edit answer', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
       '| |
       = link_to 'Delete answer', answer_path(answer), remote: true, class: 'delete-answer-link', data: { answer_id: answer.id }, method: :delete
 
-    - if user_signed_in? && current_user.is_owner?(@question)
-      '| |
-      = link_to 'Best', set_best_answer_path(answer), remote: true, class: 'best-answer-link', data: { answer_id: answer.id }, method: :patch
-      h1
-      = hidden_field_tag :answer_path, answer_path(answer)
+      = render 'answers/form_edit', answer: answer
 
+      - if policy(answer).set_best?
+        '| |
+        = link_to 'Best', set_best_answer_path(answer), remote: true, class: 'best-answer-link', data: { answer_id: answer.id }, method: :patch
+        h1
+        = hidden_field_tag :answer_path, answer_path(answer)
 
-  = render 'answers/form_edit', answer: answer
 
