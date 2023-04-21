@@ -10,7 +10,6 @@ class AnswersController < ApplicationController
   after_action :publish_answer, only: [:create]
   # before_action :authorize_answer, only: %i[update]
 
-
   def index
     @answers = @question.answers
   end
