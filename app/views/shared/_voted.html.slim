@@ -1,6 +1,6 @@
 div id="#{resource.class.name.downcase}-rating-#{resource.id}"
   = resource.rating
-- if current_user
+- if policy(resource).user?
   .vote
     = link_to '+', polymorphic_path(resource, action: :like), method: :patch, remote: true, data: { type: :json }, class: 'upvote'
     = link_to '-', polymorphic_path(resource, action: :dislike), method: :patch, remote: true, data: { type: :json }, class: 'downvote'

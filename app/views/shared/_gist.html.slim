@@ -3,9 +3,9 @@
     - if link.gist?
       div class="gist" data-src="#{"#{link.url}.json"}"
       li= link_to link.name, link.url
-      = link_to 'Remove', link_path(link), method: :delete, id: "link-#{link.id}", remote: true
+      - if policy(link).destroy?
+        = link_to 'Remove', link_path(link), method: :delete, id: "link-#{link.id}", remote: true
     - else
-
       li= link_to link.name, link.url
-      - if user_signed_in? && current_user.is_owner?(@question)
+      - if policy(link).destroy?
         = link_to 'Remove', link_path(link), method: :delete, id: "link-#{link.id}", remote: true

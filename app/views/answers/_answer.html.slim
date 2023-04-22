@@ -16,8 +16,8 @@ div id="answer-#{answer.id}"
         div id="link-id-#{link.id}"
           = link_to link.name, link.url
           br
-            - if policy(link).destroy?
-              = link_to 'Remove', link_path(link), method: :delete, id: "link-#{link.id}", remote: true
+          - if policy(link).destroy?
+            = link_to 'Remove', link_path(link), method: :delete, id: "link-#{link.id}", remote: true
 
     - if answer.files.attached?
       - answer.files.each do |file|

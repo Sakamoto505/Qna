@@ -48,4 +48,24 @@ RSpec.describe AnswerPolicy, type: :policy do
       expect(subject).to_not permit(nil, create(:answer))
     end
   end
+
+  permissions :comment? do
+    it 'grants access if user is exists' do
+      expect(subject).to permit(user)
+    end
+
+    it 'denies access if user is guest' do
+      expect(subject).to_not permit(nil)
+    end
+  end
+
+  permissions :user? do
+    it 'grants access if user is exists' do
+      expect(subject).to permit(user)
+    end
+
+    it 'denies access if user is guest' do
+      expect(subject).to_not permit(nil)
+    end
+  end
 end

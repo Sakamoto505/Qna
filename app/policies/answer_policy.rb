@@ -15,7 +15,15 @@ class AnswerPolicy < ApplicationPolicy
     user&.admin? || user&.is_owner?(record)
   end
 
+  def comment?
+    user.present?
+  end
+
   def set_best?
     user&.is_owner?(record.question)
+  end
+
+  def user?
+    user.present?
   end
 end

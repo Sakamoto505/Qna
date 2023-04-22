@@ -14,7 +14,6 @@ feature 'User can add links to question', "
   scenario 'User adds link when asks question' do
     sign_in(user)
     visit new_question_path
-
     fill_in 'Title', with: 'Test question'
     fill_in 'Body', with: 'text text text'
 

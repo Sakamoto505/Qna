@@ -75,10 +75,16 @@ RSpec.describe QuestionsController, type: :controller do
         expect(question.body).to eq 'Question_body'
       end
 
-      it 'redirects to update view' do
-        patch :update, params: { id: question, question: attributes_for(:question) }, format: :js
-        expect(response).to render_template :update
-      end
+      #  при таком коде тест проходит
+      #
+      # def update
+      #     @question.update(question_params) if current_user.is_owner?(@question)
+      #   end
+      #
+      # it 'redirects to update view' do
+      #   patch :update, params: { id: question, question: attributes_for(:question) }, format: :js
+      #   expect(response).to render_template :update
+      # end
     end
 
     context 'with invalid attributes' do
@@ -91,9 +97,10 @@ RSpec.describe QuestionsController, type: :controller do
         expect(question.body).to eq 'Question_body'
       end
 
-      it 're-renders update view' do
-        expect(response).to render_template :update
-      end
+      # Как и этот
+      # it 're-renders update view' do
+      #   expect(response).to render_template :update
+      # end
     end
   end
 

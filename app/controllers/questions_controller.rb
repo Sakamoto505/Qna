@@ -15,12 +15,16 @@ class QuestionsController < ApplicationController
   end
 
   def new
+    authorize @question
+
     @question = Question.new
     @question.links.new
     @question.build_reward
   end
 
   def create
+    authorize @question
+
     if @question.save
       redirect_to @question, notice: 'Your question successfully created.'
     else
@@ -38,16 +42,15 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    @question.update(question_params) if current_user.is_owner?(@question)
+    authorize @question
+
+    @question.update(question_params)
   end
 
   def destroy
-    if current_user.is_owner?(@question)
-      @question.destroy
-      redirect_to questions_path, notice: 'Question was successfully deleted'
-    else
-      redirect_to questions_path, notice: 'Sorry'
-    end
+    authorize @question
+    @question.destroy
+    redirect_to questions_path, notice: 'Question was successfully deleted'
   end
 
   private
