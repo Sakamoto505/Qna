@@ -36,10 +36,6 @@ class ApplicationPolicy
     false
   end
 
-  # def resource_owner?
-  #   user.id == record&.author_id
-  # end
-
   class Scope
     attr_reader :user, :scope
 

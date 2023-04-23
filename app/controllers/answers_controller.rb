@@ -8,7 +8,6 @@ class AnswersController < ApplicationController
   before_action :find_question, only: %i[new create]
   before_action :answer, only: %i[update destroy set_best]
   after_action :publish_answer, only: [:create]
-  # before_action :authorize_answer, only: %i[update]
 
   def index
     @answers = @question.answers
@@ -77,9 +76,5 @@ class AnswersController < ApplicationController
   def answer_params
     (params[:answer] || ActionController::Parameters.new).permit(:body, files: [],
                                                                         links_attributes: %i[name url])
-  end
-
-  def authorize_answer
-    authorize @answer
   end
 end
