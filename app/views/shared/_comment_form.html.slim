@@ -1,7 +1,5 @@
-- if current_user
 
-
-- if current_user
+- if policy(commentable).comment?
     = form_with scope: :comment, url: polymorphic_path(commentable, action: 'comment'), class: 'new-comment-form my-custom-form',
             html: { id: "new-comment-#{commentable.id}" }, local: false, data: { type: :json } do |f|
         .form-row

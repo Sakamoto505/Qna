@@ -8,5 +8,6 @@ FactoryBot.define do
   factory :link do
     name { 'MyString' }
     url
+    association :linkable, factory: :answer
   end
 end

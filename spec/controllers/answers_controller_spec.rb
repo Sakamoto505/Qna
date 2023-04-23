@@ -34,7 +34,7 @@ RSpec.describe AnswersController, type: :controller do
 
   describe 'DELETE #destroy' do
     before { login(user) }
-    let!(:answer) { create(:answer, author: user, question: question) }
+    let!(:answer) { create(:answer, author_id: user.id, question: question) }
 
     it 'deletes the answer' do
       expect { delete :destroy, params: { id: answer }, format: :js }.to change(Answer, :count).by(-1)
@@ -43,8 +43,8 @@ RSpec.describe AnswersController, type: :controller do
 
   describe 'PATCH #update' do
     before { login(user) }
-
-    let!(:answer) { create(:answer, question: question) }
+    let!(:question) { create(:question, author: user) }
+    let!(:answer) { create(:answer, author_id: user.id, question: question) }
 
     context 'with valid attributes' do
       it 'changes answer attributes' do
