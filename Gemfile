@@ -47,6 +47,7 @@ gem 'bootsnap', require: false
 # gem "image_processing", "~> 1.2"
 gem 'cocoon'
 gem 'devise'
+gem 'doorkeeper'
 gem 'gon'
 gem 'handlebars-source'
 gem 'omniauth'

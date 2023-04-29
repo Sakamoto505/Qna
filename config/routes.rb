@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  use_doorkeeper
   get 'rewards/index'
   devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks' }
 
@@ -29,4 +30,12 @@ Rails.application.routes.draw do
   resources :rewards, only: :index
 
   mount ActionCable.server => '/cable'
+
+  namespace :api do
+    namespace :v1 do
+      resource 'profiles', only: [] do
+        get :me, on: :collection
+      end
+    end
+  end
 end
