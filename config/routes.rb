@@ -36,6 +36,8 @@ Rails.application.routes.draw do
       resource 'profiles', only: [] do
         get :me, on: :collection
       end
+
+      resources :questions, only: [:index]
     end
   end
 end
