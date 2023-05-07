@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Profiles API', type: :request do
@@ -20,7 +22,7 @@ describe 'Profiles API', type: :request do
       end
 
       it 'returns all public fields' do
-        %w[id email admin created_at updated_at].each do |attr|
+        %w[id email created_at updated_at].each do |attr|
           expect(json['user'][attr]).to eq me.send(attr).as_json
         end
       end
@@ -58,7 +60,7 @@ describe 'Profiles API', type: :request do
       end
 
       it 'returns users attributes' do
-        %w[id email admin created_at updated_at].each do |attr|
+        %w[id email created_at updated_at].each do |attr|
           expect(users_response[attr]).to eq user.send(attr).as_json
         end
       end

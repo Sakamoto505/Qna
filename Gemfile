@@ -51,6 +51,10 @@ gem 'devise'
 gem 'doorkeeper'
 gem 'gon'
 gem 'handlebars-source'
+gem 'net-http'
+gem 'net-imap'
+gem 'net-smtp'
+gem 'oj'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
@@ -61,11 +65,7 @@ gem 'rubocop'
 gem 'rubocop-slim', '~> 0.2.2'
 gem 'slim-rails'
 gem 'twitter-bootstrap-rails'
-gem "net-http"
-gem "net-smtp"
-gem "net-imap"
-gem "uri", "0.10.0"
-gem "oj"
+gem 'uri', '0.10.0'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

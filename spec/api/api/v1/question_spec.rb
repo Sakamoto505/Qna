@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Profiles API', type: :request do
-  let(:headers) { { 'Content-Type': 'application/json',
-                    'Accept': 'application/json' } }
+  let(:headers) do
+    { 'Content-Type': 'application/json',
+      'Accept': 'application/json' }
+  end
 
   describe 'GET /api/v1/questions' do
     let(:api_path) { '/api/v1/questions' }
@@ -36,7 +40,6 @@ describe 'Profiles API', type: :request do
         let(:answer) { answers.first }
         let(:answer_response) { question_response['answers'].first }
         it 'returns list of answers' do
-
           expect(question_response['answers'].size).to eq 3
         end
         it 'returns all public fields' do
