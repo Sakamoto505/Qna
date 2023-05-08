@@ -50,4 +50,37 @@ describe 'Profiles API', type: :request do
       end
     end
   end
-end
+
+  describe 'GET /api/v1/questions/{id}' do
+    let!(:question) { create(:question, :question_with_file) }
+    let(:api_path) { "/api/v1/questions/#{question.id}" }
+
+    it_behaves_like 'API Authorizable' do
+      let(:method) { :get }
+    end
+
+    context 'authorized' do
+      let(:access_token) { create(:access_token) }
+      let(:question_response) { json['question'] }
+      let!(:links) { create_list(:link, 3, linkable: question) }
+
+      before { get api_path, params: { access_token: access_token.token }, headers: headers }
+
+      it 'returns 200 status code' do
+        expect(response).to be_successful
+      end
+
+      it 'returns all public fields' do
+        %w[id title body created_at updated_at].each do |attr|
+          expect(question_response[attr]).to eq question.send(attr).as_json
+        end
+      end
+
+      it 'does not return private fields of question' do
+        %w[user_id].each do |attr|
+          expect(question_response).to_not have_key(attr)
+        end
+      end
+    end
+    end
+  end

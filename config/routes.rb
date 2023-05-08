@@ -36,7 +36,7 @@ Rails.application.routes.draw do
         get :index, on: :collection
       end
 
-      resources :questions, only: [:index]
+      resources :questions, only: %i[index show]
     end
   end
 
