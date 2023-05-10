@@ -4,8 +4,7 @@ require 'rails_helper'
 
 describe 'Question API', type: :request do
   let(:headers) do
-    { 'Content-Type': 'application/json',
-      'Accept': 'application/json' }
+    { 'Accept': 'application/json' }
   end
 
   describe 'GET /api/v1/questions' do
@@ -83,4 +82,28 @@ describe 'Question API', type: :request do
       end
     end
   end
+
+  describe 'POST /api/v1/questions' do
+    let(:api_path) { '/api/v1/questions' }
+
+    it_behaves_like 'API Authorizable' do
+      let(:method) { :post }
+    end
+
+    context 'authorized' do
+      let(:user) { create(:user) }
+      let(:access_token) { create(:access_token, resource_owner_id: user.id) }
+
+      context 'with valid attributes' do
+        let(:valid_question) { attributes_for(:question) }
+
+        it 'returns 201 status code' do
+          post api_path, params: { access_token: access_token.token, question: valid_question }
+
+          expect(response).to have_http_status :created
+        end
+        end
+  end
+  end
+
 end
