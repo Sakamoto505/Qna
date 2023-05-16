@@ -25,14 +25,12 @@ class Api::V1::QuestionsController < Api::V1::BaseController
     end
   end
 
-  def destroy
     def destroy
       authorize @question
 
       @question.destroy
       head :no_content
     end
-  end
 
   def update
     authorize @question
