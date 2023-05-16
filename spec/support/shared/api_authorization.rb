@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 
 shared_examples_for 'API Authorizable' do
   context 'unauthorized' do

@@ -1,5 +1,7 @@
 class Api::V1::QuestionsController < Api::V1::BaseController
 
+  before_action :send_question, only: %i[show update destroy]
+
   skip_before_action :verify_authenticity_token
 
   def index
@@ -23,9 +25,32 @@ class Api::V1::QuestionsController < Api::V1::BaseController
     end
   end
 
+  def destroy
+    def destroy
+      authorize @question
+
+      @question.destroy
+      head :no_content
+    end
+  end
+
+  def update
+    authorize @question
+
+    if @question.update(question_params)
+      render json: @question, status: :ok
+    else
+      render json: { errors: @question.errors }, status: :bad_request
+    end
+  end
+
+
   private
 
+  def send_question
+    @question = Question.find(params[:id])
+  end
   def question_params
-    params.require(:question).permit(:title, :body).merge(authenticity_token: form_authenticity_token)
+    params.require(:question).permit(:title, :body)
   end
 end

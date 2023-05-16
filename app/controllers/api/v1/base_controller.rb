@@ -1,4 +1,5 @@
 class Api::V1::BaseController < ApplicationController
+
   before_action :doorkeeper_authorize!
 
   private
@@ -11,7 +12,6 @@ class Api::V1::BaseController < ApplicationController
     if doorkeeper_token
       return current_resource_owner
     end
-    # fallback to auth with warden if no doorkeeper token
     warden.authenticate(:scope => :user)
   end
 end
