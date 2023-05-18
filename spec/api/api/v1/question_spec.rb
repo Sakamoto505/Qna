@@ -94,8 +94,9 @@ describe 'Question API', type: :request do
   end
 
   describe 'PATCH /api/v1/questions/:id' do
-    let!(:question) { create(:question) }
-    let(:access_token) { create(:access_token) }
+    let!(:user) { create(:user) }
+    let!(:question) { create(:question, author: user) }
+    let(:access_token) { create(:access_token, resource_owner_id: user.id) }
     let(:api_path) { "/api/v1/questions/#{question.id}" }
 
     before do
