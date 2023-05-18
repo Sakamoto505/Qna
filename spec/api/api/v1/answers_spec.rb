@@ -72,4 +72,39 @@ describe 'Answers API', type: :request do
       end
     end
   end
+
+  describe 'PATCH /api/v1/questions/:question_id/answers/:id' do
+    let(:user) { create(:user) }
+    let(:question) { create(:question, author_id: user.id) }
+    let(:answer) { create(:answer, question_id: question.id, author_id: user.id) }
+    let(:access_token) { create(:access_token, resource_owner_id: user.id) }
+    let(:api_path) { "/api/v1/questions/#{question.id}/answers/#{answer.id}" }
+    it 'updates the answer' do
+      patch api_path, params: { answer: { body: 'Updated answer body' } },
+                      headers: { 'Authorization': "Bearer #{access_token.token}" }
+
+      expect(response).to have_http_status(:ok)
+      expect(answer.reload.body).to eq('Updated answer body')
+    end
+  end
+
+  describe 'DELETE /api/v1/answers/:id' do
+    let(:user) { create(:user) }
+    let(:question) { create(:question, author_id: user.id) }
+    let(:answer) { create(:answer, question_id: question.id, author_id: user.id) }
+    let(:access_token) { create(:access_token, resource_owner_id: user.id) }
+    let(:api_path) { "/api/v1/questions/#{question.id}/answers/#{answer.id}" }
+
+    context 'authorized' do
+      before do
+        delete api_path, params: { access_token: access_token.token },
+                         headers: { 'Authorization': "Bearer #{access_token.token}" }
+      end
+
+      it 'deletes the answer' do
+        expect(response).to have_http_status(:no_content)
+        expect(Answer.exists?(answer.id)).to be_falsey
+      end
+    end
+  end
 end

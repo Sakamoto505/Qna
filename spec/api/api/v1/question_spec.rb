@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 require 'rails_helper'
 
@@ -99,9 +100,9 @@ describe 'Question API', type: :request do
 
     before do
       patch api_path, params: { question: { title: 'Question_title' } },
-            headers: { 'Authorization' => "Bearer #{access_token.token}" }
+                      headers: { 'Authorization' => "Bearer #{access_token.token}" }
     end
-
+    #Не работает
     it 'returns 200 status code' do
       expect(response).to have_http_status(:ok)
     end
@@ -111,7 +112,6 @@ describe 'Question API', type: :request do
       expect(question.title).to eq('Question_title')
     end
   end
-
 
   describe 'DELETE /api/v1/questions/:id' do
     let!(:user) { create(:user) }
