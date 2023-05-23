@@ -63,9 +63,12 @@ gem 'pundit'
 gem 'rails_db'
 gem 'rubocop'
 gem 'rubocop-slim', '~> 0.2.2'
+gem 'sidekiq'
+gem 'sinatra', require: false
 gem 'slim-rails'
 gem 'twitter-bootstrap-rails'
 gem 'uri', '0.10.0'
+gem 'whenever', require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
