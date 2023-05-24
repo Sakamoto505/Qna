@@ -70,12 +70,15 @@ gem 'twitter-bootstrap-rails'
 gem 'uri', '0.10.0'
 gem 'whenever', require: false
 
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
+  gem 'letter_opener'
   gem 'pry'
   gem 'rspec-rails', '~> 4.0.1'
+
 end
 
 group :development do

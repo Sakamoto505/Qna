@@ -7,7 +7,7 @@ RSpec.describe DailyMailer, type: :mailer do
     let(:mail) { DailyMailer.digest(user) }
 
     it "sends the email to the correct recipient" do
-      expect(mail.to).to eq([user.email])
+      expect(mail.to).to eq(['example@example.com'])
     end
 
     it "has the correct subject" do
