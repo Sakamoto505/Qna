@@ -2,6 +2,7 @@ require "rails_helper"
 
 
 RSpec.describe AnswerMailer, type: :mailer do
+
   let(:answer) { create(:answer) }
 
   describe "notify_question_author" do

@@ -6,6 +6,8 @@ class QuestionsController < ApplicationController
 
   before_action :authenticate_user!, except: %i[index show]
   before_action :question, except: [:index]
+  before_action :find_subscription, only: [:show, :update]
+
 
   after_action :publish_question, only: [:create]
   before_action :gon_variables, only: :show
@@ -80,5 +82,9 @@ class QuestionsController < ApplicationController
     (params[:question] || ActionController::Parameters.new).permit(:title, :body, files: [],
                                                                                   links_attributes: %i[id name url _destroy],
                                                                                   reward_attributes: %i[name image])
+  end
+
+  def find_subscription
+    @subscription = @question.subscriptions.find_by(user: current_user)
   end
 end

@@ -1,6 +1,8 @@
 class AnswerNotify
 
   def send_notify(answer)
-    AnswerMailer.notify_question_author(answer).deliver_later
+    answer.question.subscriptions.map(&:user).each do |user|
+      AnswerMailer.notify_question_author(answer, user).deliver_later
+    end
   end
 end
