@@ -9,6 +9,8 @@
 
   = render 'shared/comments', commentable: question
   = render 'shared/comment_form', commentable: question
+  = render 'shared/subscribe', question: question, subscription: question.subscriptions.find_by(user: current_user)
+
 
   p reward:
   - if @question.reward.present? && @question.reward.image.attached?
