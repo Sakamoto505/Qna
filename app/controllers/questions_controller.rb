@@ -13,11 +13,7 @@ class QuestionsController < ApplicationController
   before_action :gon_variables, only: :show
 
   def index
-    @questions = if params[:search_query]
-                   Question.search_by_content(params[:search_query])
-                 else
-                   Question.all
-                 end
+    @questions = Question.all
   end
 
   def new
