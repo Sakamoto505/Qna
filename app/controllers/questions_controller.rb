@@ -13,7 +13,11 @@ class QuestionsController < ApplicationController
   before_action :gon_variables, only: :show
 
   def index
-    @questions = Question.all
+    @questions = if params[:search_query]
+                   Question.search_by_content(params[:search_query])
+                 else
+                   Question.all
+                 end
   end
 
   def new
@@ -45,8 +49,11 @@ class QuestionsController < ApplicationController
 
   def update
     authorize @question
-
+    respond_to do |format|
+      format.html { redirect_to @question }
+      format.js
     @question.update(question_params)
+  end
   end
 
   def destroy
@@ -55,6 +62,9 @@ class QuestionsController < ApplicationController
     redirect_to questions_path, notice: 'Question was successfully deleted'
   end
 
+  def search
+    @questions = Question.search_by_content(params[:query])
+  end
   private
 
   def publish_question

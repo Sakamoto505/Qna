@@ -12,6 +12,10 @@ html
     = action_cable_meta_tag
 
   body
+  = form_tag results_path, method: :get, role: 'search' do
+    = select_tag :search_type, options_for_select(['questions', 'answers', 'comments', 'users']), prompt: 'Выберите тип поиска'
+    = text_field_tag :query, params[:query]
+    = submit_tag "Искать", name: nil
 
     == render 'shared/navigation'
     p.notice

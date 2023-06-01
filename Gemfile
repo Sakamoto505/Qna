@@ -69,6 +69,7 @@ gem 'slim-rails'
 gem 'twitter-bootstrap-rails'
 gem 'uri', '0.10.0'
 gem 'whenever', require: false
+gem 'pg_search'
 
 
 group :development, :test do

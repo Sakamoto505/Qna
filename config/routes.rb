@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks' }
 
   root to: 'questions#index'
+  get 'results', to: 'results#index_search', as: 'results'
+
   concern :voted do
     member do
       patch :like
