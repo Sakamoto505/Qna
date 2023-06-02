@@ -9,7 +9,6 @@ class SubscriptionPolicy < ApplicationPolicy
     user.present? && !user.subscriptions.where(question: record.question).exists?
   end
 
-
   def destroy?
     user.present? && user.subscriptions.where(question: record.question).exists?
   end

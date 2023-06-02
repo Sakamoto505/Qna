@@ -3,7 +3,7 @@
 class Answer < ApplicationRecord
   include Votable
   include Commentable
-  include PgSearch
+  include PgSearch::Model
   multisearchable against: :body
 
   has_many_attached :files
@@ -12,12 +12,9 @@ class Answer < ApplicationRecord
   belongs_to :question
   belongs_to :author, class_name: 'User'
 
-
   validates :body, presence: true
 
   accepts_nested_attributes_for :links, reject_if: :all_blank
-
-  after_save :reindex
 
   def mark_as_best
     assign_reward if question.reward.present? # вызываем метод assign_reward, если награда присутствует
@@ -26,9 +23,5 @@ class Answer < ApplicationRecord
 
   def assign_reward
     question.reward.update(user: author)
-  end
-
-  def reindex
-    PgSearch::Multisearch.rebuild(Hero)
   end
 end

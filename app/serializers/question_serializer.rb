@@ -8,7 +8,6 @@ class QuestionSerializer < ActiveModel::Serializer
   has_many :files
   belongs_to :author
 
-
   def short_title
     object.title.truncate(7)
   end

@@ -3,9 +3,8 @@
 class Question < ApplicationRecord
   include Votable
   include Commentable
-  include PgSearch
-  multisearchable against: [:title, :body]
-
+  include PgSearch::Model
+  multisearchable against: %i[title body]
 
   has_many :answers, dependent: :destroy
   has_many :links, dependent: :destroy, as: :linkable
@@ -21,20 +20,13 @@ class Question < ApplicationRecord
   belongs_to :author, class_name: 'User'
   belongs_to :best_answer, class_name: 'Answer', optional: true
 
-
   validates :title, :body, presence: true
 
   after_create :calculate_reputation
-
-  after_save :reindex
-
 
   private
 
   def calculate_reputation
     ReputationJob.perform_later(self)
-  end
-  def reindex
-    PgSearch::Multisearch.rebuild(Hero)
   end
 end

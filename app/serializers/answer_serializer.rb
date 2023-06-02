@@ -6,5 +6,4 @@ class AnswerSerializer < ActiveModel::Serializer
   has_many :links
 
   belongs_to :author
-
 end
