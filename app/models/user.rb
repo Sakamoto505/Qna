@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  include PgSearch::Model
-  pg_search_scope :search_everywhere, against: [:email]
+  include PgSearch
+  multisearchable against: :email
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -17,6 +18,7 @@ class User < ApplicationRecord
   has_many :authorizations, dependent: :destroy
   has_many :subscriptions, dependent: :destroy
 
+  after_save :reindex
 
   def self.find_for_oauth(auth)
     FindForOauth.new(auth).call
@@ -32,5 +34,8 @@ class User < ApplicationRecord
 
   def vote(resource, value)
     votes.create(votable: resource, value: value)
+  end
+  def reindex
+    PgSearch::Multisearch.rebuild(Hero)
   end
 end

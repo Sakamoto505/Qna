@@ -2,35 +2,11 @@ h3
   | Результаты поиска по запросу
   em
     = params[:query]
-h4
-  | Вопросы:
-- @search_results.select { |result| result.is_a?(Question) }.each do |result|
+- @search_results.each do |pg_search_document|
   h4
-    = link_to highlight(result.title, params[:query]), result
+    = link_to pg_search_document.searchable.query, pg_search_document.searchable
   div
-    = highlight(result.body.html_safe, params[:query])
-  hr
-h4
-  | Ответы:
-- @search_results.select { |result| result.is_a?(Answer) }.each do |result|
-  h4
-    = link_to highlight(result.body, params[:query]), result.question
-  hr
-h4
-  | Комментарии:
-- @search_results.select { |result| result.is_a?(Comment) }.each do |result|
-  div
-    = link_to result.commentable.body, result.commentable
-  div
-    = result.body.html_safe
-  hr
-h4
-  | Пользователи:
-- @search_results.select { |result| result.is_a?(User) }.each do |result|
-  h4
-    = link_to highlight(result.email, params[:query]), result
-  hr
-p
-  | Нажмите
-  = link_to 'здесь', root_path
-  |  для возврата на главную страницу.
+    = pg_search_document.title.html_safe
+| Нажмите
+= link_to 'здесь', root_path
+|  для возврата на главную страницу.

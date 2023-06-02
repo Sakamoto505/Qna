@@ -2,7 +2,7 @@ doctype html
 html
   head
     title
-      | Qna
+    | Qna
     meta[name="viewport" content="width=device-width, initial-scale=1"]
     = csrf_meta_tags
     = csp_meta_tag
@@ -11,10 +11,9 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = action_cable_meta_tag
   body
-    = form_tag results_path, method: :get, role: 'search', class: 'search-form' do
-      = select_tag :search_type, options_for_select(%w[questions answers comments users]), prompt: 'Выберите тип поиска', class: 'search-select'
-      = text_field_tag :query, params[:query], class: 'search-input'
-      = submit_tag 'Искать', name: nil, class: 'search-submit'
+    = form_tag results_path, method: :get, role: 'search' do
+      = text_field_tag :query, params[:query]
+      = submit_tag "Искать", name: nil
     = render 'shared/navigation'
     p.notice
       = notice
