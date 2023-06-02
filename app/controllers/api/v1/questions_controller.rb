@@ -1,5 +1,4 @@
 class Api::V1::QuestionsController < Api::V1::BaseController
-
   before_action :send_question, only: %i[show update destroy]
 
   skip_before_action :verify_authenticity_token
@@ -25,12 +24,12 @@ class Api::V1::QuestionsController < Api::V1::BaseController
     end
   end
 
-    def destroy
-      authorize @question
+  def destroy
+    authorize @question
 
-      @question.destroy
-      head :no_content
-    end
+    @question.destroy
+    head :no_content
+  end
 
   def update
     authorize @question
@@ -42,12 +41,12 @@ class Api::V1::QuestionsController < Api::V1::BaseController
     end
   end
 
-
   private
 
   def send_question
     @question = Question.find(params[:id])
   end
+
   def question_params
     params.require(:question).permit(:title, :body)
   end

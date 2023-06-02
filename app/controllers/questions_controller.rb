@@ -6,8 +6,7 @@ class QuestionsController < ApplicationController
 
   before_action :authenticate_user!, except: %i[index show]
   before_action :question, except: [:index]
-  before_action :find_subscription, only: [:show, :update]
-
+  before_action :find_subscription, only: %i[show update]
 
   after_action :publish_question, only: [:create]
   before_action :gon_variables, only: :show
@@ -48,8 +47,8 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to @question }
       format.js
-    @question.update(question_params)
-  end
+      @question.update(question_params)
+    end
   end
 
   def destroy
@@ -61,6 +60,7 @@ class QuestionsController < ApplicationController
   def search
     @questions = Question.search_by_content(params[:query])
   end
+
   private
 
   def publish_question
