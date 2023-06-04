@@ -3,6 +3,8 @@
 class Question < ApplicationRecord
   include Votable
   include Commentable
+  include PgSearch::Model
+  multisearchable against: %i[title body]
 
   has_many :answers, dependent: :destroy
   has_many :links, dependent: :destroy, as: :linkable
@@ -21,7 +23,6 @@ class Question < ApplicationRecord
   validates :title, :body, presence: true
 
   after_create :calculate_reputation
-
 
   private
 

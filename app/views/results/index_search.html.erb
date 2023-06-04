@@ -1,0 +1,22 @@
+<%= link_to 'Главная', root_path %>
+
+<% if @search_results.present? %>
+  <h1>Search Results</h1>
+  <% @search_results.each do |result| %>
+    <% case result.searchable
+       when Question %>
+      <h2><%= link_to result.searchable.title, question_path(result.searchable) %></h2>
+      <p><%= truncate(result.searchable.body, length: 100) %></p>
+    <% when Answer %>
+      <h2><%= link_to "Answer for: #{result.searchable.question.title}", question_path(result.searchable.question) %></h2>
+      <p><%= truncate(result.searchable.body, length: 100) %></p>
+    <% when Comment %>
+      <h2>Comment for: <%= link_to result.searchable.commentable.title, question_path(result.searchable.commentable) if result.searchable.commentable.is_a? Question %></h2>
+      <p><%= truncate(result.searchable.body, length: 100) %></p>
+    <% when User %>
+      <h2><%= link_to result.searchable.email, user_path(result.searchable) %></h2>
+    <% end %>
+  <% end %>
+<% else %>
+  <h1>No Results</h1>
+<% end %>

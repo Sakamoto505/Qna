@@ -1,5 +1,4 @@
 class Api::V1::BaseController < ApplicationController
-
   before_action :doorkeeper_authorize!
 
   private
@@ -9,9 +8,8 @@ class Api::V1::BaseController < ApplicationController
   end
 
   def current_user
-    if doorkeeper_token
-      return current_resource_owner
-    end
-    warden.authenticate(:scope => :user)
+    return current_resource_owner if doorkeeper_token
+
+    warden.authenticate(scope: :user)
   end
 end

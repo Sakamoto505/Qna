@@ -6,8 +6,7 @@ class QuestionsController < ApplicationController
 
   before_action :authenticate_user!, except: %i[index show]
   before_action :question, except: [:index]
-  before_action :find_subscription, only: [:show, :update]
-
+  before_action :find_subscription, only: %i[show update]
 
   after_action :publish_question, only: [:create]
   before_action :gon_variables, only: :show
@@ -45,14 +44,21 @@ class QuestionsController < ApplicationController
 
   def update
     authorize @question
-
-    @question.update(question_params)
+    respond_to do |format|
+      format.html { redirect_to @question }
+      format.js
+      @question.update(question_params)
+    end
   end
 
   def destroy
     authorize @question
     @question.destroy
     redirect_to questions_path, notice: 'Question was successfully deleted'
+  end
+
+  def search
+    @questions = Question.search_by_content(params[:query])
   end
 
   private

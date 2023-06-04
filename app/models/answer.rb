@@ -3,6 +3,8 @@
 class Answer < ApplicationRecord
   include Votable
   include Commentable
+  include PgSearch::Model
+  multisearchable against: :body
 
   has_many_attached :files
   has_many :links, dependent: :destroy, as: :linkable

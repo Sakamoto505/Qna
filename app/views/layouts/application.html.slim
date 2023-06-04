@@ -2,18 +2,19 @@ doctype html
 html
   head
     title
-      | Qna
-    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    | Qna
+    meta[name="viewport" content="width=device-width, initial-scale=1"]
     = csrf_meta_tags
     = csp_meta_tag
     = Gon::Base.render_data
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = action_cable_meta_tag
-
   body
-
-    == render 'shared/navigation'
+    = form_tag results_path, method: :get, role: 'search' do
+      = text_field_tag :query, params[:query]
+      = submit_tag 'Искать', name: nil
+    = render 'shared/navigation'
     p.notice
       = notice
     p.alert
