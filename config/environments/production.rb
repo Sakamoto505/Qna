@@ -101,7 +101,7 @@ Rails.application.configure do
   # config.action_mailer.smtp_settings = {
 
 
-
+#проверка
   #   address: 'smtp.gmail.com',
   #   port: 587,
   #   user_name:            Rails.application.credentials[:production][:gmail][:email],
