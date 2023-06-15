@@ -59,6 +59,7 @@ gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
+gem 'pg_search'
 gem 'pundit'
 gem 'rails_db'
 gem 'rubocop'
@@ -69,8 +70,9 @@ gem 'slim-rails'
 gem 'twitter-bootstrap-rails'
 gem 'uri', '0.10.0'
 gem 'whenever', require: false
-gem 'pg_search'
 
+#deploy
+gem 'rake', '13.0.6'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -79,6 +81,11 @@ group :development, :test do
   gem 'letter_opener'
   gem 'pry'
   gem 'rspec-rails', '~> 4.0.1'
+  gem 'capistrano', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rvm', require: false
+  gem 'capistrano-passenger', require: false
 
 end
 
