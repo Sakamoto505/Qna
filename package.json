@@ -1,5 +1,7 @@
 {
   "name": "qna",
+  "license": "MIT",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@nathanvda/cocoon": "^1.2.14",
