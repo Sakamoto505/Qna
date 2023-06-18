@@ -1,4 +1,6 @@
 {
+  "name": "qna",
+  "private": true,
   "dependencies": {
     "@nathanvda/cocoon": "^1.2.14",
     "@rails/actioncable": "^7.0.4-3",
