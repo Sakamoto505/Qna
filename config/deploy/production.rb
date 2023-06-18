@@ -6,7 +6,7 @@
 server "159.89.13.221", user: "deployer", roles: %w{app db web}, primary: true
 set :rails_env, :production
 
-
+set :branch, ENV["BRANCH"] || "main"
 
 # Custom SSH Options
 # ==================
@@ -22,4 +22,3 @@ set :ssh_options, {
   auth_methods: %w(publickey password),
   port: 2222
 }
-
