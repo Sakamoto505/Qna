@@ -8,6 +8,19 @@ set :rails_env, :production
 
 set :branch, ENV["BRANCH"] || "main"
 
+before "deploy:assets:precompile", "deploy:yarn_install"
+
+namespace :deploy do
+  desc 'Run rake yarn:install'
+  task :yarn_install do
+    on roles(:web) do
+      within release_path do
+        execute("cd #{release_path} && yarn install")
+      end
+    end
+  end
+end
+
 # Custom SSH Options
 # ==================
 # You may pass any option but keep in mind that net/ssh understands a
