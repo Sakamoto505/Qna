@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.3'
+ruby '3.0.6'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 6.1.7'
@@ -69,7 +69,7 @@ gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim-rails'
 gem 'twitter-bootstrap-rails'
-gem 'uri', '0.10.0'
+gem 'uri'
 gem 'whenever', require: false
 
 #deploy
@@ -84,7 +84,7 @@ group :development, :test do
   gem 'capistrano', require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails', require: false
-  gem 'capistrano-rvm', require: false
+  gem 'capistrano-rbenv', require: false
 
 
   gem 'capistrano-passenger', require: false

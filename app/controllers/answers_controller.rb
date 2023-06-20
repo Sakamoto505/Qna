@@ -58,11 +58,12 @@ class AnswersController < ApplicationController
   def publish_answer
     return if @answer.errors.any?
 
-    ActionCable.server.broadcast("answer_#{find_question.id}",
-                                 author: current_user.email,
-                                 rating: @answer.rating,
-                                 links: @answer.links,
-                                 answer: @answer)
+    ActionCable.server.broadcast("answer_#{find_question.id}", {
+      author: current_user.email,
+      rating: @answer.rating,
+      links: @answer.links,
+      answer: @answer}
+    )
   end
 
   def find_question

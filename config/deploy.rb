@@ -5,6 +5,7 @@ set :application, "Qna"
 set :repo_url, "git@github.com:Sakamoto505/Qna.git"
 
 set :branch, 'main'
+set :rbenv_ruby, "3.0.6"
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/deployer/qna"
