@@ -309,7 +309,7 @@ GEM
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
-    redis (4.8.1)
+    redis (4.5.0)
     regexp_parser (2.8.1)
     request_store (1.5.1)
       rack (>= 1.4)
@@ -490,7 +490,7 @@ DEPENDENCIES
   rails-controller-testing
   rails_db
   rake (= 13.0.6)
-  redis (~> 4.0)
+  redis (= 4.5.0)
   rspec-rails (~> 4.0.1)
   rubocop
   rubocop-slim (~> 0.2.2)
