@@ -65,7 +65,7 @@ gem 'pundit'
 gem 'rails_db'
 gem 'rubocop'
 gem 'rubocop-slim', '~> 0.2.2'
-gem 'sidekiq'
+gem 'sidekiq', '~> 6.1.3'
 gem 'sinatra', require: false
 gem 'slim-rails'
 gem 'twitter-bootstrap-rails'
