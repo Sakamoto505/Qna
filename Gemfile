@@ -72,6 +72,7 @@ gem 'slim-rails'
 gem 'twitter-bootstrap-rails'
 gem 'uri'
 gem 'whenever', require: false
+gem 'unicorn'
 
 #deploy
 gem 'rake', '13.0.6'
@@ -87,6 +88,7 @@ group :development, :test do
   gem 'capistrano-rails', require: false
   gem 'capistrano-rbenv', require: false
   gem 'capistrano-sidekiq', require: false
+  gem 'capistrano3-unicorn', require: false
 
 
   gem 'capistrano-passenger', require: false
