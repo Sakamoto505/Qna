@@ -9,7 +9,7 @@ class Answer < ApplicationRecord
   has_many_attached :files
   has_many :links, dependent: :destroy, as: :linkable
 
-  belongs_to :question
+  belongs_to :question, touch: true
   belongs_to :author, class_name: 'User'
 
   validates :body, presence: true
