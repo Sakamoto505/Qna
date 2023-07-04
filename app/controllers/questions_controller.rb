@@ -12,7 +12,7 @@ class QuestionsController < ApplicationController
   before_action :gon_variables, only: :show
 
   def index
-    @questions = Question.all
+    @questions = Question.order(id: :desc).all
   end
 
   def new
