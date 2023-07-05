@@ -1,41 +1,41 @@
+- cache answer do
+  div id="answer-#{answer.id}"
 
-div id="answer-#{answer.id}"
+    mark= answer.body
 
-  mark= answer.body
+    p Rating:
+    = render 'shared/voted', resource: answer
 
-  p Rating:
-  = render 'shared/voted', resource: answer
+    .answer*{data: { answer_id: answer.id } }
+      = render 'shared/comments', commentable: answer
+      = render 'shared/comment_form', commentable: answer
 
-  .answer*{data: { answer_id: answer.id } }
-    = render 'shared/comments', commentable: answer
-    = render 'shared/comment_form', commentable: answer
+    .links
+      ul
+        - answer.links.each do |link|
+          div id="link-id-#{link.id}"
+            = link_to link.name, link.url
+            br
+            - if policy(link).destroy?
+              = link_to 'Remove', link_path(link), method: :delete, id: "link-#{link.id}", remote: true
 
-  .links
-    ul
-      - answer.links.each do |link|
-        div id="link-id-#{link.id}"
-          = link_to link.name, link.url
-          br
-          - if policy(link).destroy?
-            = link_to 'Remove', link_path(link), method: :delete, id: "link-#{link.id}", remote: true
+      - if answer.files.attached?
+        - answer.files.each do |file|
+          p= link_to file.filename.to_s, url_for(file)
 
-    - if answer.files.attached?
-      - answer.files.each do |file|
-        p= link_to file.filename.to_s, url_for(file)
+          p= link_to 'Delete file', attachment_path(file.id), method: :delete, remote: true
 
-        p= link_to 'Delete file', attachment_path(file.id), method: :delete, remote: true
-
-    - if policy(answer).update?
-      = link_to 'Edit answer', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
-      '| |
-      = link_to 'Delete answer', answer_path(answer), remote: true, class: 'delete-answer-link', data: { answer_id: answer.id }, method: :delete
-
-      = render 'answers/form_edit', answer: answer
-
-      - if policy(answer).set_best?
+      - if policy(answer).update?
+        = link_to 'Edit answer', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
         '| |
-        = link_to 'Best', set_best_answer_path(answer), remote: true, class: 'best-answer-link', data: { answer_id: answer.id }, method: :patch
-        h1
-        = hidden_field_tag :answer_path, answer_path(answer)
+        = link_to 'Delete answer', answer_path(answer), remote: true, class: 'delete-answer-link', data: { answer_id: answer.id }, method: :delete
+
+        = render 'answers/form_edit', answer: answer
+
+        - if policy(answer).set_best?
+          '| |
+          = link_to 'Best', set_best_answer_path(answer), remote: true, class: 'best-answer-link', data: { answer_id: answer.id }, method: :patch
+          h1
+          = hidden_field_tag :answer_path, answer_path(answer)
 
 
