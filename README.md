@@ -1,4 +1,3 @@
-
 Mini stack overflow
 Used technologies:
 TDD/BDD
